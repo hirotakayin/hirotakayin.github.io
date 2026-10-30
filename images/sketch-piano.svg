@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" fill="none" stroke="#1d1d1d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- open lid -->
+  <path d="M30 70 L70 26 L150 20 L168 58"/>
+  <path d="M70 26 L52 68"/>
+  <!-- case -->
+  <path d="M22 78 L168 58 L184 84 L52 108 Z"/>
+  <path d="M52 108 L52 116 L184 92 L184 84"/>
+  <!-- keys -->
+  <path d="M54 100 L176 78" stroke-width="1.6"/>
+  <path d="M62 105 L63 100 M72 104 L73 98 M82 102 L83 96 M92 100 L93 94 M102 98 L103 92 M112 96 L113 90 M122 94 L123 88 M132 92 L133 86 M142 90 L143 84 M152 88 L153 82" stroke-width="1.4"/>
+  <!-- legs -->
+  <path d="M60 116 L60 142"/><path d="M178 94 L178 138"/><path d="M116 108 L116 130"/>
+  <path d="M54 142 L68 142"/><path d="M172 138 L186 138"/>
+  <!-- bench -->
+  <path d="M96 128 L130 124 M100 128 L100 144 M126 125 L126 141" stroke-width="2"/>
+</svg>

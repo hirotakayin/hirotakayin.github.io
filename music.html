@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>victor yin — music</title>
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --muted: #8a8a8a;
+      --orange: #ff8c00;
+      --placeholder: #e6e6e6;
+      --pad: 5rem;         /* page side padding */
+      --split: 5rem;       /* margin between content and the center string (same on both sides) */
+      --font-main: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      font-weight: 700;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ==========================================================================
+       NAV
+       ========================================================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      padding: 2rem var(--pad);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+    .nav-right { display: flex; justify-content: flex-end; gap: 2rem; }
+    .nav-link {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: lowercase;
+      transition: opacity 0.2s ease;
+    }
+    .nav-link:hover { opacity: 0.55; }
+    .nav-link.active { text-decoration: underline; text-underline-offset: 4px; }
+    .nav-center {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: lowercase;
+      letter-spacing: -0.02em;
+    }
+
+    /* ==========================================================================
+       STAGE: two columns split by a "string"
+       ========================================================================== */
+    .stage {
+      position: relative;
+      padding-bottom: 16rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 0;
+      row-gap: 9rem;
+      align-items: start;
+    }
+
+    .col-l { padding: 5rem var(--split) 0 var(--pad); }
+    /* overflow-x: clip -> anything sliding in is hidden until it passes the string */
+    .col-r { padding: 5rem var(--pad) 0 var(--split); overflow-x: clip; }
+
+    .hero      { grid-column: 1; grid-row: 1; }
+    .right-top { grid-column: 2; grid-row: 1; display: flex; flex-direction: column; gap: 5rem; }
+    .names     { grid-column: 1; grid-row: 2; padding-top: 0; }
+    .img-2     { grid-column: 2; grid-row: 2; padding-top: 0; }
+
+    .headline {
+      font-size: clamp(0.85rem, 1.16vw, 1.16rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      max-width: 24em;
+    }
+
+    .intro p {
+      font-size: clamp(0.8rem, 0.88vw, 0.9rem);
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      max-width: 26em;
+    }
+
+    /* ---- schematic ---- */
+    .schematic-wrap {
+      margin-top: 4rem;
+      margin-right: calc(var(--split) * -1);   /* run all the way to the string */
+    }
+    #schematic {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+    #schematic:focus-visible { outline: 2px dashed var(--orange); outline-offset: 6px; }
+    #schematic .ln { stroke: #000; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; fill: #fff; }
+    #schematic .thin { stroke: #000; stroke-width: 1.2; fill: none; }
+    #schematic .str { stroke: #000; stroke-width: 2; fill: none; }
+    #schematic .str-glow { stroke: var(--orange); stroke-width: 3; fill: none; opacity: 0; }
+
+    .hint { font-family: var(--font-main); font-weight: 800; font-size: 12px; fill: var(--orange); }
+    .hint-arrow { stroke: var(--orange); stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .hint-group { animation: bob 1.3s ease-in-out infinite; transition: opacity 0.5s ease; }
+    .hint-group.done { opacity: 0.3; animation-duration: 2.6s; }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+    /* ---- names ---- */
+    .work + .work { margin-top: 4rem; }
+    .work h2 {
+      font-size: clamp(0.85rem, 1.16vw, 1.16rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .work p {
+      margin-top: 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      max-width: 28em;
+      line-height: 1.4;
+    }
+
+    /* ---- image placeholders ---- */
+    .ph {
+      position: relative;
+      width: 50%;               /* half of the previous size */
+      aspect-ratio: 4 / 3;
+      background: var(--placeholder);
+    }
+    .ph-label {
+      position: absolute;
+      top: 0.6rem; left: 0.6rem;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: 0.01em;
+    }
+
+    /* ==========================================================================
+       THE STRING (center divider)
+       ========================================================================== */
+    #string-svg {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 120px;
+      margin-left: -60px;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 5;
+    }
+
+    /* ==========================================================================
+       REVEAL (triggered as the string lights up)
+       ========================================================================== */
+    /* text: simple fade up */
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    /* images: no fade / scale / pop. They simply slide left -> right out from
+       behind the string (the right column clips everything left of the string). */
+    .js .reveal.ph {
+      opacity: 1;
+      transform: translateX(calc(-100% - var(--split)));
+      transition: transform 0.9s cubic-bezier(0.22, 0.8, 0.25, 1);
+      will-change: transform;
+    }
+    .js .reveal.ph.in { transform: none; }
+
+    /* ==========================================================================
+       MOBILE
+       ========================================================================== */
+    @media (max-width: 820px) {
+      :root { --pad: 1.5rem; --split: 2.5rem; }
+      .header { grid-template-columns: auto 1fr; row-gap: 0.5rem; padding: 1.25rem var(--pad); }
+      .nav-center { grid-row: 2; grid-column: 1 / -1; }
+      .nav-right { gap: 1.1rem; }
+      .grid { grid-template-columns: minmax(0, 1fr); row-gap: 4rem; }
+      .col-l { padding: 3rem var(--split) 0 var(--pad); }
+      .col-r { padding: 0 var(--split) 0 var(--pad); }
+      .hero, .right-top, .names, .img-2 { grid-column: 1; grid-row: auto; }
+      .right-top { gap: 3rem; }
+      /* string lives at the right edge on small screens */
+      #string-svg { left: calc(100% - 1.25rem); }
+      .schematic-wrap { margin-right: calc((var(--split) - 1.25rem) * -1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hint-group { animation: none; }
+      .js .reveal, .js .reveal.ph { transition: none; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <nav><a class="nav-link" href="index.html">home</a></nav>
+    <div class="nav-center" id="live-clock">pittsburgh 00:00:00</div>
+    <nav class="nav-right">
+      <a class="nav-link" href="projects.html">projects</a>
+      <a class="nav-link active" href="music.html">music</a>
+      <a class="nav-link" href="index.html#about">fun</a>
+      <a class="nav-link" href="index.html#about">about</a>
+    </nav>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- THE STRING: vibrates + lights up when the key is struck -->
+    <svg id="string-svg" viewBox="0 0 120 1000" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="glowGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1000">
+          <stop offset="0" stop-color="#ff8c00" stop-opacity="0"/>
+          <stop offset="0" stop-color="#ff8c00" stop-opacity="0"/>
+          <stop offset="0" stop-color="#ff8c00" stop-opacity="0"/>
+          <stop offset="0" stop-color="#ffb347" stop-opacity="0"/>
+          <stop offset="0" stop-color="#ff8c00" stop-opacity="0"/>
+          <stop offset="1" stop-color="#ff8c00" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="haloBlur" filterUnits="userSpaceOnUse" x="0" y="-20" width="120" height="1040">
+          <feGaussianBlur stdDeviation="5"/>
+        </filter>
+      </defs>
+      <path id="string-halo" d="M60 0 L60 1000" fill="none" stroke="url(#glowGrad)" stroke-width="14" opacity="0.65" filter="url(#haloBlur)"/>
+      <path id="string-base" d="M60 0 L60 1000" fill="none" stroke="#000" stroke-width="2"/>
+      <path id="string-glow" d="M60 0 L60 1000" fill="none" stroke="url(#glowGrad)" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+
+    <div class="grid">
+
+      <!-- LEFT: headline + interactive lego piano key -->
+      <section class="col-l hero">
+        <h1 class="headline">a modular keyboard i&rsquo;m currently working on:</h1>
+
+        <div class="schematic-wrap">
+          <svg id="schematic" viewBox="0 0 600 340" role="button" tabindex="0"
+               aria-label="Lego piano key schematic. Click to strike the key.">
+            <defs>
+              <g id="stud"><rect class="ln" width="18" height="7" rx="1.5"/></g>
+            </defs>
+
+            <!-- baseplate -->
+            <rect class="ln" x="10" y="300" width="590" height="26"/>
+            <use href="#stud" x="30" y="293"/><use href="#stud" x="70" y="293"/>
+            <use href="#stud" x="110" y="293"/><use href="#stud" x="150" y="293"/>
+            <use href="#stud" x="190" y="293"/><use href="#stud" x="310" y="293"/>
+            <use href="#stud" x="350" y="293"/><use href="#stud" x="390" y="293"/>
+            <use href="#stud" x="430" y="293"/><use href="#stud" x="470" y="293"/>
+            <use href="#stud" x="550" y="293"/>
+
+            <!-- string post (left) -->
+            <rect class="ln" x="4" y="100" width="24" height="200"/>
+            <use href="#stud" x="7" y="93"/>
+            <line class="thin" x1="4" y1="140" x2="28" y2="140"/>
+            <line class="thin" x1="4" y1="180" x2="28" y2="180"/>
+            <line class="thin" x1="4" y1="220" x2="28" y2="220"/>
+            <line class="thin" x1="4" y1="260" x2="28" y2="260"/>
+
+            <!-- key pivot bracket -->
+            <path class="ln" d="M226 300 L250 262 L274 300 Z"/>
+
+            <!-- hammer support column -->
+            <rect class="ln" x="508" y="182" width="24" height="118"/>
+            <line class="thin" x1="508" y1="222" x2="532" y2="222"/>
+            <line class="thin" x1="508" y1="262" x2="532" y2="262"/>
+
+            <!-- push rod (action) -->
+            <g id="rod">
+              <rect class="ln" x="436" y="184" width="8" height="56"/>
+              <circle class="ln" cx="440" cy="240" r="4"/>
+            </g>
+
+            <!-- KEY -->
+            <g id="key">
+              <rect class="ln" x="40" y="240" width="410" height="30" rx="3"/>
+              <use href="#stud" x="56" y="233"/><use href="#stud" x="96" y="233"/>
+              <use href="#stud" x="136" y="233"/><use href="#stud" x="176" y="233"/>
+              <use href="#stud" x="216" y="233"/><use href="#stud" x="256" y="233"/>
+              <use href="#stud" x="296" y="233"/><use href="#stud" x="336" y="233"/>
+              <use href="#stud" x="376" y="233"/>
+              <line class="thin" x1="40" y1="255" x2="226" y2="255"/>
+              <line class="thin" x1="274" y1="255" x2="450" y2="255"/>
+            </g>
+            <circle class="ln" cx="250" cy="256" r="6"/>
+
+            <!-- HAMMER -->
+            <g id="hammer">
+              <rect class="ln" x="316" y="169" width="216" height="12" rx="2"/>
+              <circle class="ln" cx="320" cy="175" r="16"/>
+              <circle class="thin" cx="320" cy="175" r="10" stroke-dasharray="3 3"/>
+            </g>
+            <circle class="ln" cx="520" cy="175" r="7"/>
+
+            <!-- STRING (schematic section) -->
+            <path id="h-string" class="str" d="M16 118 L600 118"/>
+            <path id="h-glow" class="str-glow" d="M16 118 L600 118"/>
+            <circle class="ln" cx="16" cy="118" r="4"/>
+
+            <!-- Click me! -->
+            <g class="hint-group" id="hint">
+              <text class="hint" x="62" y="200">Click me!</text>
+              <path class="hint-arrow" d="M150 206 Q166 222 128 231"/>
+              <path class="hint-arrow" d="M137 223 L127 231 L139 236"/>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- RIGHT: intro + image 1 -->
+      <section class="col-r right-top">
+        <div class="intro">
+          <p>music has always been a core part of how I meet and connect with others, a form of interaction without cultural or linguistic borders.</p>
+        </div>
+        <div class="ph reveal">
+          <span class="ph-label">kaede01 image (placeholder)</span>
+        </div>
+      </section>
+
+      <!-- LEFT: names -->
+      <section class="col-l names">
+        <div class="work reveal">
+          <h2>Kaede</h2>
+          <p>description placeholder</p>
+        </div>
+        <div class="work reveal">
+          <h2>Somethin Spice</h2>
+          <p>description placeholder</p>
+        </div>
+      </section>
+
+      <!-- RIGHT: image 2 -->
+      <section class="col-r img-2">
+        <div class="ph reveal"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+  (function () {
+    /* ---------- live pittsburgh clock ---------- */
+    const clock = document.getElementById('live-clock');
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+    });
+    function tick() { clock.textContent = 'pittsburgh ' + fmt.format(new Date()); }
+    setInterval(tick, 1000); tick();
+
+    /* ---------- elements ---------- */
+    const $ = (id) => document.getElementById(id);
+    const stage = $('stage'), strSvg = $('string-svg');
+    const base = $('string-base'), glow = $('string-glow'), halo = $('string-halo');
+    const grad = $('glowGrad'), stops = [...grad.querySelectorAll('stop')];
+    const haloFilter = $('haloBlur');
+    const svg = $('schematic'), keyG = $('key'), rod = $('rod'), ham = $('hammer');
+    const hStr = $('h-string'), hGlow = $('h-glow');
+    const hint = $('hint');
+    const reveals = [...document.querySelectorAll('.reveal')];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- constants (schematic geometry, svg units) ---------- */
+    const KEY_ANGLE = 5;      // deg the key tilts
+    const HAMMER_ANGLE = 11.6; // deg the hammer swings to reach the string
+    const ROD_RISE = 16.4;
+    const STRIKE_MS = 110;    // time until hammer meets string
+    const STRING_Y = 118;
+
+    /* ---------- helpers ---------- */
+    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+    const easeOutQuad = (t) => 1 - (1 - t) * (1 - t);
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+    let H = 0;
+    let running = false, startT = 0, hit = false;
+    let pulse = false, strikeT = 0, sy = 0, dur = 2000;
+    let userScrolled = false;
+
+    /* ---------- string rendering ---------- */
+    function setD(d) {
+      base.setAttribute('d', d);
+      glow.setAttribute('d', d);
+      halo.setAttribute('d', d);
+    }
+    function setStop(i, offset, opacity) {
+      stops[i].setAttribute('offset', offset.toFixed(5));
+      stops[i].setAttribute('stop-opacity', opacity.toFixed(3));
+    }
+    function setGlow(startY, headY, fade) {
+      const a = clamp((startY - 120) / H, 0, 1);
+      const b = clamp(headY / H, a, 1);
+      const c = clamp((headY + 120) / H, b, 1);
+      setStop(0, 0, 0);
+      setStop(1, Math.max(0, a - 0.0005), 0);
+      setStop(2, a, 0.4 * fade);
+      setStop(3, b, fade);
+      setStop(4, c, 0);
+      setStop(5, 1, 0);
+    }
+    function drawRest() {
+      setD('M60 0 L60 ' + H);
+      setGlow(0, 0, 0);
+      hStr.setAttribute('d', 'M16 ' + STRING_Y + ' L600 ' + STRING_Y);
+      hGlow.setAttribute('d', 'M16 ' + STRING_Y + ' L600 ' + STRING_Y);
+      hGlow.style.opacity = 0;
+    }
+    function measure() {
+      H = stage.offsetHeight;
+      strSvg.setAttribute('viewBox', '0 0 120 ' + H);
+      strSvg.setAttribute('preserveAspectRatio', 'none');
+      grad.setAttribute('y2', H);
+      haloFilter.setAttribute('height', H + 40);
+      if (!running) drawRest();
+    }
+
+    function drawVerticalString(tp, py, fade) {
+      let d = '';
+      for (let y = 0; y <= H; y += 5) {
+        const taper = Math.min(1, y / 40, (H - y) / 40);
+        const travelling = 6 * Math.exp(-Math.abs(y - py) / 150) * Math.sin(y * 0.05 - tp * 0.045);
+        const standing = 3 * Math.sin(Math.PI * y / H) * Math.cos(tp * 0.03) * Math.exp(-tp / 900);
+        const x = 60 + fade * taper * (travelling + standing);
+        d += (y === 0 ? 'M' : 'L') + x.toFixed(2) + ' ' + y + ' ';
+      }
+      setD(d);
+    }
+
+    function drawHorizontalString(tp) {
+      const A = 9 * Math.exp(-tp / 420) * Math.cos(tp * 0.05);
+      const N = 48;
+      let d = '';
+      for (let i = 0; i <= N; i++) {
+        const u = i / N;
+        const x = 16 + 584 * u;
+        const y = STRING_Y + A * (Math.sin(Math.PI * u) + 0.5 * Math.sin(2 * Math.PI * u) * Math.cos(tp * 0.02));
+        d += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(2) + ' ';
+      }
+      hStr.setAttribute('d', d);
+      hGlow.setAttribute('d', d);
+      hGlow.style.opacity = Math.exp(-tp / 700).toFixed(3);
+    }
+
+    /* ---------- key / hammer timeline ---------- */
+    function keyPress(t) {
+      if (t < STRIKE_MS) return easeOutQuad(t / STRIKE_MS);
+      if (t < 200) return 1;
+      if (t < 420) return 1 - easeInOut((t - 200) / 220);
+      return 0;
+    }
+
+    /* ---------- reveal + camera-follow ---------- */
+    function revealUpTo(py) {
+      const sTop = stage.getBoundingClientRect().top;
+      reveals.forEach((el) => {
+        if (el.classList.contains('in')) return;
+        const top = el.getBoundingClientRect().top - sTop;
+        if (top + 40 <= py) el.classList.add('in');
+      });
+    }
+    function follow(py) {
+      if (userScrolled || reduceMotion) return;
+      const abs = stage.getBoundingClientRect().top + window.scrollY + py;
+      const target = abs - window.innerHeight * 0.6;
+      if (target > window.scrollY) window.scrollTo(0, target);
+    }
+    ['wheel', 'touchstart', 'mousedown'].forEach((e) =>
+      window.addEventListener(e, (ev) => { if (!svg.contains(ev.target)) userScrolled = true; }, { passive: true })
+    );
+    window.addEventListener('keydown', (ev) => {
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home'].includes(ev.key)) userScrolled = true;
+    });
+
+    /* ---------- the strike ---------- */
+    function onStrike(now) {
+      const sRect = svg.getBoundingClientRect();
+      const stRect = stage.getBoundingClientRect();
+      sy = (sRect.top - stRect.top) + STRING_Y * (sRect.height / 340);
+      dur = clamp((H - sy) / 0.9, 1400, 3400);
+      strikeT = now;
+      pulse = true;
+
+      if (reduceMotion) {
+        reveals.forEach((el) => el.classList.add('in'));
+        pulse = false;
+      }
+    }
+
+    function frame(now) {
+      const t = now - startT;
+      const p = keyPress(t);
+      const f = t < STRIKE_MS ? 1 : 1 - 0.6 * easeOutCubic(Math.min(1, (t - STRIKE_MS) / 150));
+
+      keyG.setAttribute('transform', 'rotate(' + (-KEY_ANGLE * p).toFixed(3) + ' 250 256)');
+      rod.setAttribute('transform', 'translate(0 ' + (-ROD_RISE * p).toFixed(3) + ')');
+      ham.setAttribute('transform', 'rotate(' + (HAMMER_ANGLE * p * f).toFixed(3) + ' 520 175)');
+
+      if (!hit && t >= STRIKE_MS) { hit = true; onStrike(now); }
+
+      let more = t < 430;
+
+      if (pulse) {
+        const tp = now - strikeT;
+        const u = clamp(tp / dur, 0, 1);
+        const py = sy + (H - sy) * easeInOut(u);
+        const fade = tp < dur ? 1 : clamp(1 - (tp - dur) / 1400, 0, 1);
+
+        drawVerticalString(tp, py, fade);
+        setGlow(sy, py, fade);
+        drawHorizontalString(tp);
+        revealUpTo(py);
+        follow(py);
+
+        if (tp < dur + 1400) more = true; else pulse = false;
+      }
+
+      if (more) {
+        requestAnimationFrame(frame);
+      } else {
+        running = false;
+        drawRest();
+      }
+    }
+
+    function strike() {
+      const now = performance.now();
+      if (running && now - startT < 260) return;   // debounce
+      startT = now;
+      hit = false;
+      userScrolled = false;
+      hint.classList.add('done');
+      if (!running) { running = true; requestAnimationFrame(frame); }
+    }
+
+    svg.addEventListener('click', strike);
+    svg.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); strike(); }
+    });
+
+    window.addEventListener('resize', measure);
+    window.addEventListener('load', measure);
+    measure();
+  })();
+  </script>
+</body>
+</html>

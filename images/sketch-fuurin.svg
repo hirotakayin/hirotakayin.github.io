@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 130" fill="none" stroke="#1d1d1d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- hanging string -->
+  <path d="M30 0 L30 14"/>
+  <circle cx="30" cy="17" r="3"/>
+  <!-- bell -->
+  <path d="M10 44 Q12 22 30 20 Q48 22 50 44 Z" fill="#1d1d1d" fill-opacity="0.85"/>
+  <path d="M8 46 L52 46"/>
+  <!-- clapper -->
+  <path d="M30 46 L30 58"/>
+  <circle cx="30" cy="61" r="2.5"/>
+  <!-- tanzaku paper strip -->
+  <path d="M30 64 L30 70"/>
+  <path d="M23 70 L37 70 L37 124 L23 124 Z" fill="#ffffff" fill-opacity="0.6"/>
+  <path d="M30 78 L30 114" stroke-width="1" stroke-dasharray="2 3"/>
+</svg>

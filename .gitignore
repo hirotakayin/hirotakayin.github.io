@@ -1,0 +1,9 @@
+# local only: the archive and design sources stay off the public site
+v1/
+figma/
+
+# local edit mode
+edit/
+edit.bat
+.edit-backups/
+CAD-gallery/

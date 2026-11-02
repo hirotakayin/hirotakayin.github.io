@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>victor yin — Kamome Spectrometer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="../project.css">
+</head>
+<body class="paper">
+  <!-- letterpress look: edges wander a little and the ink drops out in specks -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="print-text" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".1875" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -1.075" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+    <filter id="print-img" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".2125" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .8 0 0 0 -.56" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+  </svg>
+
+  <header class="nav">
+    <a class="n-home" href="../index.html">home</a>
+    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
+    <a class="n-projects active" href="../projects.html">projects</a>
+    <a class="n-resume" href="../resume.html">resume</a>
+  </header>
+
+  <main class="layout">
+    <section class="row">
+      <div class="group"><figure><img class="ink" src="../images/sun-lab.webp" alt=""></figure></div>
+      <div class="text print">
+        <h1>Kamome Spectrometer</h1>
+        <p class="when">Sun Lab, University of Washington · October 2023 – August 2025</p>
+        <p>Self-driving labs can speed up the discovery of new materials, but low-cost, high-throughput characterization has held them back. My research focused on affordable, easy-to-build, open-source systems that make measurement more accessible, so researchers in underserved regions can accelerate work in areas such as green technology.</p>
+        <p class="skills-title">Skills</p>
+        <div class="skills"><span>Mechanical design</span><span>Stepper motor control</span><span>Arduino</span><span>Opentrons OT-2</span><span>Raspberry Pi</span><span>3D printing</span><span>Bayesian optimization</span></div>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">Figure: Kamome with an Ocean Optics probe (back left) and MaraCam (front left) in the Opentrons workspace</div></figure><figure><div class="ph">Video: scanning a custom printed 12-well plate</div></figure></div>
+      <div class="text print">
+        <h2>An automated spectrometer gantry</h2>
+        <p>Kamome enables high-throughput characterization of perovskites. The goal was a compact, simple device that is easy to build.</p><p>When idle, its overhead probe sits outside the workspace, so the robot can pipette directly onto the lab plate. During a scan, the plate moves gradually as the probe passes across. An Arduino and 2 stepper motors drive the plate carriage and probe, and it works alongside the Opentrons OT-2 robot.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">Figure: mechanisms within the gantry</div></figure><figure><div class="ph">Figure: electronics case</div></figure></div>
+      <div class="text print">
+        <h2>How it moves</h2>
+        <p>The probe holder is driven by a belt system. The plate carrier rests on 2 linear rails with 2 elastic latches, and is driven by a lead screw. An electronics case houses the Arduino, CNC shield and stepper motor drivers.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">Figure: photoluminescent peak intensity vs chlorine and bromine concentration. Credit: Zuyang Ye</div></figure><figure><div class="ph">Figures: intensity decay rate vs anneal time and measurement location</div></figure></div>
+      <div class="text print">
+        <h2>Results</h2>
+        <p>Kamome proved useful for quickly identifying patterns in the peak intensities of perovskite films, including how photoluminescent peak intensity varies with chlorine and bromine concentration, and how intensity decays with anneal time and measurement location.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">Figure: phase 1 of prototyping, Nov. 2024</div></figure></div>
+      <div class="text print">
+        <h2>Prototyping</h2>
+        <p>I worked through trade studies, concept sketches, peer discussions, detailed CAD and 3D printed prototyping. The early design phase was especially hard, since the device had to meet a tight space requirement with minimal moving parts.</p><p>As a self-guided project, it sharpened my mechanical design skills, and taught me to approach open-ended problems and to know when to ask for feedback.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">Mara pipetting GIF</div></figure></div>
+      <div class="text print">
+        <h2>Closing the loop</h2>
+        <p>I also built a closed-loop Bayesian optimization workflow linking automated pipetting, mixing and substrate inspection, replacing trial-and-error parameter tuning. I co-authored and presented research on AI-driven laboratory automation workflows (<a href="https://doi.org/10.5206/joh.v9i1.23044">DOI: 10.5206/joh.v9i1.23044</a>).</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">MaraCam</div></figure><figure><div class="ph">Scrapped concepts: Thorlabs mount, adjustable arm, overhead wired gantry</div></figure></div>
+      <div class="text print">
+        <h2>MaraCam</h2>
+        <p>MaraCam is an open-source, 3D-printed RGB imaging tool that fits the Opentrons OT-2 workspace. It runs Raspberry Pi OS with a 12MP Arducam IMX708 wide-angle camera, whose 152° diagonal field of view can image the underside of a clear 96-well plate, and it can be customized for other cameras and Raspberry Pi models.</p><p>Vattenary, another member of the Mara team, later upgraded it with an IMX219 auto-focus camera and completed the workflow for digital color analysis.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">Mara platform</div></figure></div>
+      <div class="text print">
+        <h2>The Mara platform</h2>
+        <p>Mara is an autonomous robot system built on the Opentrons OT-2, combining automated pipetting, material characterization and machine-learned parameter selection to accelerate work on the lead-halide perovskites used in solar cells.</p><p>It demonstrated perovskite synthesis by combining and heating precursors prepared by people. Further work included a custom heater module reaching 150°C instead of 96°C, and an external robotic arm to transport lab plates, moving toward full automation without a human in the loop.</p>
+        <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../site.js"></script>
+</body>
+</html>

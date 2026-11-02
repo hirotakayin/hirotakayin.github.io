@@ -6,599 +6,191 @@
   <title>victor yin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --paper: #eceef7;
-      --ink: #111111;
-      --red: #c41230;
-      --teal: #7ba8ad;
-      --chip-blue: #a9b8f6;
-      --grey: #d9d9d9;
-      --tape: #dccfae;
-      --font: "Libre Franklin", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --maxw: 1500px;
-    }
-
-    html { font-size: clamp(12px, 1.1vw, 17px); scroll-behavior: smooth; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font);
-      color: var(--ink);
-      background-color: var(--paper);
-      /* page background: images/bg-paper.png (600x600 seamless tile, shown at 300px) */
-      background-image: url("images/bg-paper.png");
-      background-size: 300px 300px;
-      background-repeat: repeat;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-    img { display: block; max-width: 100%; height: auto; }
-
-    .page { max-width: var(--maxw); margin: 0 auto; position: relative; }
-
-    /* masking tape strips: images/bg-tape-hero.png, images/bg-tape-about.png (flat strips, rotated here) */
-    .tape {
-      position: absolute;
-      height: auto;
-      max-width: none;
-      pointer-events: none;
-      z-index: 0;
-      transform-origin: 0 0;
-    }
-
-    /* ==========================================================================
-       NAV
-       ========================================================================== */
-    .nav {
-      position: sticky; top: 0; z-index: 60;
-      display: flex; align-items: center;
-      padding: 1rem 6% 1rem 9.5%;
-      font-size: 0.9rem; font-weight: 400;
-      background: rgba(236, 238, 247, 0.78);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    .nav a:hover { opacity: .55; }
-    .home { position: relative; display: inline-block; }
-    .fuurin {
-      position: absolute; left: 50%; top: 70%;
-      width: 2.6rem; margin-left: -1.3rem;
-      transform-origin: 50% 0;
-      pointer-events: none;
-      will-change: transform;
-    }
-    .nav-links { display: flex; gap: 2.2rem; margin-left: auto; margin-right: 3.5rem; }
-    .nav-icons { display: flex; gap: 1.1rem; align-items: center; }
-    .nav-icons svg { width: 1.15rem; height: 1.15rem; display: block; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* ==========================================================================
-       SECTION 1 — HERO (mobile-first, desktop overrides below)
-       ========================================================================== */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
-      padding: 2rem 1.25rem 5rem;
-    }
-    .hero > * { position: relative; z-index: 2; }
-    .hero .tape-hero { display: none; }
-    #doodle { position: absolute !important; inset: 0; width: 100%; height: 100%; z-index: 20 !important; pointer-events: none; }
-    #doodle.on { pointer-events: auto; touch-action: none; }
-    #doodle.pen { cursor: crosshair; }
-    #doodle.sticker { cursor: copy; }
-
-    .sk { width: 9rem; }
-    .sk.tennis { width: 5rem; }
-    .name {
-      font-size: 3.4rem; font-weight: 500; letter-spacing: -0.025em; line-height: 1;
-      text-align: center;
-    }
-    .card { position: relative; width: min(22rem, 92%); aspect-ratio: 200 / 75; }
-    .card-art { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .card-text {
-      position: absolute; left: 36%; top: 26%; width: 40%;
-      font-size: 0.82rem; line-height: 1.25; font-weight: 400;
-    }
-    .card-text span { display: block; }
-    .card-text span + span { margin-top: .6rem; }
-
-    .tools { display: flex; gap: .8rem; }
-    .tool {
-      display: flex; flex-direction: column; align-items: center; gap: .25rem;
-      font-size: .62rem; font-weight: 500; opacity: .8;
-      padding: .35rem .5rem; border-radius: .5rem;
-      transition: background .2s ease, opacity .2s ease;
-    }
-    .tool svg { width: 1.5rem; height: 1.5rem; fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .tool:hover { opacity: 1; }
-    .tool[aria-pressed="true"] { background: rgba(196, 18, 48, .14); opacity: 1; }
-    .tool:disabled { opacity: .3; cursor: default; }
-
-    .down { display: block; width: 3.2rem; color: var(--ink); }
-    .down svg { width: 100%; height: auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; display: block; }
-
-    @media (min-width: 761px) {
-      .hero { display: block; aspect-ratio: 603 / 322; padding: 0; }
-      .hero > * { position: absolute; }
-      .hero .tape-hero { display: block; left: 61%; top: -4%; width: 62%; transform: rotate(15deg); z-index: 0; }
-
-      .sk { width: auto; }
-      .sk.fuurin-spare { display: none; }
-      .tennis { left: 63.6%; top: 14%; width: 7%; }
-      .name { left: 52.4%; top: 41%; transform: translateX(-50%); font-size: 4.3rem; white-space: nowrap; }
-      .card { left: 35.7%; top: 52.8%; width: 33.2%; }
-      .drone { left: 20.5%; top: 47%; width: 11.5%; }
-      .piano { left: 72.8%; top: 47.5%; width: 13.2%; }
-      .tools { right: 3.2%; top: 41%; flex-direction: column; gap: .4rem; align-items: flex-end; z-index: 30; }
-      .tool { flex-direction: row; gap: .55rem; }
-      .down.hero-down { left: 50%; top: 88%; margin-left: -1.6rem; }
-    }
-
-    /* ==========================================================================
-       SECTION 2 — SELECTED WORKS
-       ========================================================================== */
-    .work-sec { position: relative; padding: 3rem 1.25rem 0; }
-    .works { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .record { display: none; }
-
-    .big { grid-column: 1; position: relative; z-index: 2; }
-    .big-frame { position: relative; aspect-ratio: 16 / 10; background: var(--grey); overflow: hidden; }
-    .big-frame img { width: 100%; height: 100%; object-fit: cover; transition: opacity .25s ease, transform .35s ease; }
-    .big-frame.swap img { opacity: 0; transform: scale(1.015); }
-    .chip-blue {
-      position: absolute; left: 3.2%; top: 5%; z-index: 3;
-      background: var(--chip-blue); padding: .55rem .9rem .5rem;
-      font-size: 1.05rem; line-height: 1.25; font-weight: 400;
-      transition: opacity .2s ease;
-    }
-    .chip-blue small { display: block; font-size: .95rem; }
-    .big-title {
-      position: absolute; left: 11%; top: 54%; z-index: 3;
-      font-size: .7rem; font-weight: 700;
-    }
-    .big-caption { margin-top: .8rem; font-size: .8rem; font-weight: 400; line-height: 1.4; max-width: 34em; transition: opacity .2s ease; }
-
-    .thumbs { display: flex; flex-direction: column; gap: 1rem; z-index: 2; }
-    .thumb {
-      display: grid; grid-template-columns: 7.7% minmax(0, 1fr); gap: 0;
-      text-align: left; align-items: stretch;
-    }
-    .thumb .side { display: flex; flex-direction: column; align-items: flex-start; gap: .25rem; padding-right: .3rem; }
-    .thumb .num { font-family: "SFMono-Regular", Consolas, Menlo, monospace; font-size: .72rem; font-weight: 700; line-height: 1; }
-    .thumb .bar { flex: 1; width: 52%; background: var(--red); transform: scaleY(0); transform-origin: top; transition: transform .35s ease; }
-    .thumb[aria-pressed="true"] .bar { transform: scaleY(1); }
-    .thumb .frame { position: relative; aspect-ratio: 16 / 10; background: var(--grey); overflow: hidden; }
-    .thumb .frame img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-    .thumb:hover .frame img { transform: scale(1.04); }
-    .thumb .t-title {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      font-size: .62rem; font-weight: 700; white-space: nowrap; z-index: 2;
-    }
-
-    /* arrow lives under the caption, in the free space beside the thumbnails, so no extra gap is added */
-    .down.work-down { display: none; }
-
-    @media (min-width: 761px) {
-      .work-sec { padding: 3rem 0 0; }
-      .works { width: 72.4%; margin-left: 16.3%; grid-template-columns: 63.4% 35.5%; column-gap: 1.1%; row-gap: 0; align-items: start; }
-      .record {
-        display: block; position: absolute; z-index: 1;
-        left: -9.4%; top: 5%; width: 17.2%; aspect-ratio: 1;
-        border-radius: 50%;
-        transition: filter .3s ease, transform .3s ease;
-      }
-      .record:hover { transform: scale(1.04); }
-      .record.active { filter: drop-shadow(0 0 .45rem rgba(196, 18, 48, .55)); }
-      .record img { width: 100%; height: 100%; display: block; animation: spin 26s linear infinite; }
-      .big { grid-column: 1; grid-row: 1; }
-      .thumbs { grid-column: 2; grid-row: 1; gap: 1rem; }
-      .chip-blue { font-size: 1.2rem; }
-      .down.work-down { display: block; margin: 2rem 0 0 0; }
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ==========================================================================
-       SECTION 3 — ABOUT
-       ========================================================================== */
-    .about-sec { position: relative; overflow: hidden; padding: 1.5rem 1.25rem 8rem; }
-    .about-sec .tape-about { display: none; }
-    .about { position: relative; z-index: 2; display: grid; gap: 3.5rem; grid-template-columns: minmax(0, 1fr); }
-    .profile { position: relative; width: min(18rem, 80%); }
-    .profile img { width: 100%; aspect-ratio: 600 / 560; object-fit: cover; }
-    .chip-red {
-      position: absolute; left: -9%; top: 5%; z-index: 3;
-      background: var(--red); color: var(--ink);
-      padding: .4rem .7rem .35rem; font-size: 1.2rem; font-weight: 400; white-space: nowrap;
-    }
-    .profile-name {
-      position: absolute; left: 18%; top: 38%; z-index: 3;
-      font-size: 2.6rem; font-weight: 700; color: #fff; letter-spacing: -0.01em; line-height: 1;
-    }
-
-    .about-text { font-size: 0.82rem; line-height: 1.45; font-weight: 400; max-width: 30rem; }
-    .about-text p + p { margin-top: 1.1rem; }
-    .about-text h3 { font-size: .85rem; font-weight: 700; margin: 2rem 0 .55rem; }
-    .row { display: grid; grid-template-columns: var(--c1, 54%) 1fr; margin-top: .25rem; }
-    .row.soft { --c1: 21%; }
-    .row.lang { --c1: 100%; }
-    .contact { display: flex; gap: 1.4rem; margin-top: .3rem; }
-    .contact a:hover { opacity: .55; }
-
-    .fun { position: relative; width: min(24rem, 100%); aspect-ratio: 173 / 140; }
-    .fun .rec { position: absolute; width: 43%; aspect-ratio: 1; }
-    .fun .rec img { width: 100%; height: 100%; display: block; }
-    .fun .rec.blue { left: 0; top: 2%; }
-    .fun .rec.red  { left: 30%; top: 0; }
-    .fun:hover .rec.red img { animation: spin 6s linear infinite; }
-    .sleeve {
-      position: absolute; bottom: 0; width: 71%; aspect-ratio: 520 / 400;
-      background: var(--grey); box-shadow: 3px 0 0 rgba(0,0,0,.18);
-      transition: transform .3s cubic-bezier(.2, .8, .2, 1);
-    }
-    .sleeve img { width: 100%; height: 100%; object-fit: cover; }
-    .sleeve .lbl { position: absolute; left: 6%; top: 50%; transform: translateY(-50%); font-size: .62rem; font-weight: 700; }
-    .sleeve.s1 { left: 0; z-index: 1; }
-    .sleeve.s2 { left: 11.6%; z-index: 2; }
-    .sleeve.s3 { left: 28.9%; z-index: 3; }
-    .sleeve.s3 .lbl { left: 24%; }
-    .sleeve:hover { transform: translateY(-.6rem); }
-
-    @media (min-width: 761px) {
-      .about-sec { padding: 1.5rem 0 7rem; min-height: 60rem; }
-      .about-sec .tape-about { display: block; left: -4%; top: 10%; width: 120%; transform: rotate(25deg); z-index: 0; }
-      .about { grid-template-columns: 16.3% 24% 13.6% 32.3% 13.8%; gap: 0; row-gap: 5rem; align-items: start; }
-      .profile { grid-column: 2; grid-row: 1; width: 100%; }
-      .about-text { grid-column: 4; grid-row: 1 / span 2; font-size: .88rem; max-width: none; padding-top: .25rem; }
-      .fun { grid-column: 2 / span 2; grid-row: 2; width: 76.4%; }
-      .fun-wrap { display: contents; }
-    }
-
-    /* ==========================================================================
-       MOBILE TWEAKS
-       ========================================================================== */
-    @media (max-width: 760px) {
-      html { font-size: 15px; }
-      .nav { flex-wrap: wrap; gap: .5rem 1rem; padding: .9rem 1.25rem; }
-      .nav-links { margin: 0 0 0 auto; gap: 1rem; }
-      .nav-icons { width: 100%; justify-content: flex-start; }
-      .fuurin { display: none; }
-      .thumbs { flex-direction: row; gap: .6rem; }
-      .thumb { grid-template-columns: 1fr; }
-      .thumb .side { flex-direction: row; align-items: center; padding: 0 0 .3rem; }
-      .thumb .bar { width: 0; height: .35rem; flex: 1; margin-left: .4rem; transform: scaleX(0); transform-origin: left; }
-      .thumb[aria-pressed="true"] .bar { transform: scaleX(1); }
-      .chip-red { left: 0; }
-      .profile { margin-left: .5rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .record img, .fun:hover .rec.red img { animation: none !important; }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
-
-  <!-- shared SVG bits -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <symbol id="arrow-down" viewBox="0 0 56 64">
-        <path d="M21 4 L35 3 L34 31 L50 30 L28 60 L6 31 L22 32 Z"/>
-      </symbol>
-    </defs>
+  <!-- letterpress look: edges wander a little and the ink drops out in specks -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="print-text" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".1875" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -1.075" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+    <filter id="print-img" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".2125" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .8 0 0 0 -.56" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
   </svg>
 
-  <!-- ========================= NAV ========================= -->
+  <div class="bg" aria-hidden="true">
+    <div class="sheet-fill" id="fill-1"></div>
+    <img class="strip" id="strip-1" src="images/sheet-a.webp" alt="">
+    <div class="sheet-fill" id="fill-2"></div>
+    <img class="strip" id="strip-3" src="images/sheet-a.webp" alt="">
+  </div>
   <header class="nav">
-    <a class="home" href="index.html">home
-      <img class="fuurin" id="fuurin" src="images/sketch-fuurin.svg" alt="">
-    </a>
-    <nav class="nav-links">
-      <a href="projects.html">projects</a>
-      <a href="music.html">music &amp; art</a>
-      <a href="#about">about</a>
-    </nav>
-    <div class="nav-icons">
-      <a href="#" aria-label="email" title="email">
-        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 L12 13 L20.5 6.5"/></svg>
-      </a>
-      <a href="#" aria-label="linkedin" title="linkedin">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10.5 V16.5 M8 7.6 V7.7 M12 16.5 V10.5 M12 13 C12 11 16 10 16 13.2 V16.5"/></svg>
-      </a>
-      <a href="#" aria-label="youtube" title="youtube">
-        <svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.3 L15 12 L10 14.7 Z"/></svg>
-      </a>
-    </div>
+    <a class="n-home active" href="index.html">home</a>
+    <img class="nav-sky" src="images/skyline.webp" alt="">
+    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
+    <a class="n-projects" href="projects.html">projects</a>
+    <a class="n-resume" href="resume.html">resume</a>
   </header>
 
-  <div class="page">
-
-    <!-- ========================= 1 — HERO ========================= -->
-    <section class="hero" id="top">
-      <img class="tape tape-hero" src="images/bg-tape-hero.png" alt="" width="1860" height="240">
-      <canvas id="doodle"></canvas>
-
-      <img class="sk tennis" src="images/sketch-tennis-player.svg" alt="tennis player sketch">
-      <h1 class="name">victor yin</h1>
-
-      <div class="card">
-        <img class="card-art" src="images/card-perspective.png" alt="" width="1000" height="375">
-        <p class="card-text">
-          <span>Mechanical engineering student @CMU</span>
-          <span>drones, mechanisms, lego &amp; music</span>
-        </p>
-      </div>
-
-      <img class="sk drone" id="drone" src="images/sketch-drone.svg" alt="drone sketch">
-      <img class="sk piano" src="images/sketch-piano.svg" alt="piano sketch">
-
-      <div class="tools" role="toolbar" aria-label="doodle tools">
-        <button class="tool" id="tool-pen" aria-pressed="false" title="pen tool">
-          <svg viewBox="0 0 24 24"><path d="M4 20 L5 15 L16 4 L20 8 L9 19 Z"/><path d="M14 6 L18 10"/></svg>
-          <span>pen</span>
-        </button>
-        <button class="tool" id="tool-sticker" aria-pressed="false" title="sticker tool">
-          <svg viewBox="0 0 24 24"><path d="M12 3 L14.4 9 L21 9.6 L16 14 L17.6 20.5 L12 17 L6.4 20.5 L8 14 L3 9.6 L9.6 9 Z"/></svg>
-          <span>sticker</span>
-        </button>
-        <button class="tool" id="tool-undo" title="undo tool" disabled>
-          <svg viewBox="0 0 24 24"><path d="M9 7 L4 12 L9 17"/><path d="M4 12 H15 A5 5 0 0 1 15 22 H12"/></svg>
-          <span>undo</span>
-        </button>
-      </div>
-
-      <a class="down hero-down" href="#work" aria-label="scroll down">
-        <svg viewBox="0 0 56 64"><use href="#arrow-down"/></svg>
-      </a>
-    </section>
-
-    <!-- ========================= 2 — SELECTED WORKS ========================= -->
-    <section class="work-sec" id="work">
-      <div class="works">
-
-        <!-- record 01 — spins slowly, click to return to the first work -->
-        <button class="record active" id="record" aria-label="Selected works 01">
-          <img src="images/record-01-selected-works.png" alt="" width="400" height="400">
-        </button>
-
-        <!-- large preview -->
-        <div class="big">
-          <div class="big-frame" id="big-frame">
-            <img id="big-img" src="images/work-01-summer-internship.png" alt="summer internship preview" width="1200" height="750">
-            <div class="chip-blue" id="big-chip">What I was doing this summer<small>--&gt;</small></div>
-            <span class="big-title" id="big-title">summer internship</span>
-          </div>
-          <p class="big-caption" id="big-caption">placeholder text</p>
-          <a class="down work-down" href="#about" aria-label="scroll down">
-            <svg viewBox="0 0 56 64"><use href="#arrow-down"/></svg>
-          </a>
-        </div>
-
-        <!-- 02 03 04 -->
-        <div class="thumbs">
-          <button class="thumb" data-i="1" aria-pressed="false">
-            <span class="side"><span class="num">02</span><span class="bar"></span></span>
-            <span class="frame"><img src="images/work-02-current-research.png" alt="" width="1200" height="750"><span class="t-title">current research</span></span>
-          </button>
-          <button class="thumb" data-i="2" aria-pressed="false">
-            <span class="side"><span class="num">03</span><span class="bar"></span></span>
-            <span class="frame"><img src="images/work-03-lego.png" alt="" width="1200" height="750"><span class="t-title">lego</span></span>
-          </button>
-          <button class="thumb" data-i="3" aria-pressed="false">
-            <span class="side"><span class="num">04</span><span class="bar"></span></span>
-            <span class="frame"><img src="images/work-04-projects.png" alt="" width="1200" height="750"><span class="t-title">projects</span></span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= 3 — ABOUT ========================= -->
-    <section class="about-sec" id="about">
-      <img class="tape tape-about" src="images/bg-tape-about.png" alt="" width="3000" height="208">
-
-      <div class="about">
-        <div class="profile">
-          <img src="images/profile-pic.png" alt="profile picture placeholder" width="600" height="560">
-          <div class="chip-red">More about me:</div>
-          <div class="profile-name">Victor</div>
-        </div>
-
-        <div class="about-text">
-          <p>I love designing clever mechanisms to simplify interfaces, from autonomous drones to lego machines and accessible UI/UX.</p>
-          <p>Also enjoy connecting through music, cooking, more!</p>
-
-          <h3>Education</h3>
-          <div class="row"><span>[school / degree]</span><span>[years]</span></div>
-          <div class="row"><span>[school / degree]</span><span>[years]</span></div>
-
-          <h3>Software</h3>
-          <div class="row soft"><span>CAD</span><span>[SolidWorks, OnShape, ...]</span></div>
-          <div class="row soft"><span></span><span>[Python, ...]</span></div>
-          <div class="row soft"><span>Graphics</span><span>[Adobe AE, PS, ...]</span></div>
-
-          <h3>Proficient Languages</h3>
-          <div class="row lang"><span>[English, ...]</span></div>
-
-          <h3>Contact</h3>
-          <div class="contact">
-            <a href="#">email</a><a href="#">linkedin</a><a href="#">youtube</a>
-          </div>
-        </div>
-
-        <!-- fun stuff: records tucked behind stacked sleeves -->
-        <div class="fun">
-          <div class="rec blue"><img src="images/record-blue.png" alt="" width="400" height="400"></div>
-          <div class="rec red"><img src="images/record-05-fun-stuff.png" alt="" width="400" height="400"></div>
-          <a class="sleeve s1" href="music.html"><img src="images/fun-music.png" alt="" width="520" height="400"><span class="lbl">music</span></a>
-          <a class="sleeve s2" href="#"><img src="images/fun-cooking.png" alt="" width="520" height="400"><span class="lbl">cooking</span></a>
-          <a class="sleeve s3" href="#"><img src="images/fun-lego.png" alt="" width="520" height="400"><span class="lbl">lego</span></a>
-        </div>
-      </div>
-    </section>
-
+  <!-- hangs from the dot at its top; the strip hangs from the dot at the bottom of the bell -->
+  <div class="fuurin" id="fuurin" aria-hidden="true">
+    <img src="images/fuurin-top.webp" alt="">
+    <img class="tanzaku" id="tanzaku" src="images/fuurin-strip.webp" alt="">
   </div>
 
-  <script>
-  (function () {
-    const $ = (s) => document.querySelector(s);
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  <!-- stays on screen: its lines change as the page scrolls -->
+  <div class="overlay" id="overlay">
+    <div class="words">
+      <div class="print">
+        <p class="lead" id="lead"></p>
+        <div class="extras">
+          <span class="extra links"><a href="resume.html">resume <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></span>
+          <a class="extra more" id="more" href="projects.html">read more <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a>
+          <a class="extra see" href="projects.html">see more <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a>
+          <a class="extra summer" href="projects/apple.html"><span class="lg" id="logo-end"></span>what i did this summer <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div style="translate: 0 2.71rem" class="media">
+        <div class="media-set"></div>
+        <div class="media-set"></div>
+        <div class="media-set">
+          <a class="tile" href="projects/kamome.html"><span class="art"><span class="ph">diagram</span></span><span class="over print"><strong>Kamome Spectrometer</strong></span></a>
+        </div>
+      </div>
+  </div>
 
-    /* ======================================================================
-       1. fuurin sways (a bit more when you scroll)
-       ====================================================================== */
-    const fuurin = $('#fuurin');
-    let lastY = window.scrollY, vel = 0;
+  <section class="story" id="story">
+    <a class="view" href="#about" data-beat="me" data-text="I&#x27;m a mechE masters student at Carnegie Mellon with a background in mechatronics and machine learning. i.e. I love tinkering with mechanisms and workflows.">
+      <span class="card">
+      <img class="photo" src="images/me.webp" alt="">
+      <span class="chip print">Hi I am</span>
+      <span class="big print">Victor</span>
+      </span>
+    </a>
+    <a class="view" href="projects/drones.html" data-beat="cerlab" data-text="At Carnegie, I&#x27;m working on smarter, safer drones for unmanned exploration without GPS.">
+      <span class="card">
+      <img class="photo" src="images/cerlab-v1-1.webp" alt="">
+      <span class="chip print">CMU CERLAB</span>
+      </span>
+    </a>
+    <a class="view" href="projects/kamome.html" data-beat="sun" data-text="In undergrad, I was building self-driving experiments with computer-vision, ML in lab robots.">
+      <span class="card">
+      <img class="photo" src="images/cerlab-v1.webp" alt="">
+      <span class="chip print">UW Sun Lab</span>
+      </span>
+    </a>
+  </section>
 
-    function loop(t) {
-      const y = window.scrollY;
-      vel = vel * 0.82 + Math.abs(y - lastY) * 0.18;
-      lastY = y;
+  <section class="cad" id="cad" data-beat="cad" data-text="I equally love just CADing and designing cool assemblies.">
+    <div class="pin">
+      <div class="window-shadow" id="window-shadow">
+      <div class="window" id="window">
+        <div class="track" id="track">
+          <div class="cols">
+      <div>
+        <a style="translate: 1.4rem -8.4rem" class="tile" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/cad-1-senior-capstone.webp" width="1400" height="1153" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone - Autonomous Cleaning Robot</strong></span></a>
+        <a style="translate: 2.2rem -9.3rem" class="tile" href="projects/lego.html"><span class="art"><img class="ink moving" src="images/cad-3-lego-ump.webp" width="800" height="450" alt="" loading="lazy"></span><span class="over print"><strong>LEGO UMP</strong></span></a>
+        <a style="translate: 2rem -9.1rem" class="tile" href="projects/kamome.html"><span class="art"><img class="ink" src="images/cad-5-kamome-crop.webp" width="1400" height="1153" alt="" loading="lazy"></span><span class="over print"><strong>Kamome Spectrometer</strong></span></a>
+        <a style="translate: 1.8rem -5.4rem" class="tile" href="projects/apple.html"><span class="art"><img class="ink" src="images/cad-7-apple-dc.webp" width="1400" height="788" alt="" loading="lazy"></span><span class="over print"><strong>Apple Design Challenge</strong></span></a>
+        <a style="translate: 1.1rem -4.4rem" class="tile" href="projects/lego.html"><span class="art"><img class="ink" src="images/slide-16-9-8.png" width="1400" height="788" alt="" loading="lazy"></span><span class="over print"><strong>Apple Design Challenge</strong></span></a>
+        <!-- seen while the logo closes -->
+        <a style="translate: 71.8rem -41.5rem" class="tile" href="projects/kamome.html"><span class="art"><img class="ink" src="images/cad-backup-kamome.webp" width="1400" height="653" alt="" loading="lazy"></span><span class="over print"><strong>Kamome Spectrometer</strong></span></a>
+        <a class="tile" href="projects/lego.html"><span class="art"><img class="ink moving" src="images/cad-backup-lego-ump.webp" width="800" height="450" alt="" loading="lazy"></span><span class="over print"><strong>LEGO UMP</strong></span></a>
+      </div>
+      <div>
+        <a style="translate: 0.5rem -8.1rem" class="tile" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/cad-2-senior-capstone.webp" width="1400" height="901" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone - Autonomous Cleaning Robot</strong></span></a>
+        <a style="translate: 1.7rem 2.1rem" class="tile" href="projects/lego.html"><span class="art"><img class="ink moving" src="images/cad-4-lego-m4.webp" width="800" height="450" alt="" loading="lazy"></span><span class="over print"><strong>LEGO M4A4</strong></span></a>
+        <a style="translate: 1.6rem 4.1rem" class="tile" href="projects/kamome.html"><span class="art"><img class="ink moving" src="images/cad-6-kamome-perovskite.webp" width="800" height="450" alt="" loading="lazy"></span><span class="over print"><strong>Kamome - Spectrometer</strong></span></a>
+        <a style="translate: 1.9rem 2.9rem" class="tile" href="projects/phil-up.html"><span class="art"><img class="ink" src="images/cad-8-phil-up.webp" width="1400" height="1153" alt="" loading="lazy"></span><span class="over print"><strong>Phil-Up - Makerspace Robot</strong></span></a>
+        
+        <!-- seen while the logo closes -->
+        <a style="translate: -69.3rem 35.7rem" class="tile" href="projects/lego.html"><span class="art"><img class="ink" src="images/9-lego-msr-page.webp" width="1400" height="788" alt="" loading="lazy"></span><span class="over print"><strong>LEGO MSR</strong></span></a>
+        <a style="translate: 2.2rem -3.1rem" class="tile" href="projects/lego.html"><span class="art"><img class="ink moving" src="images/backup-lego-ump.gif" width="800" height="450" alt="" loading="lazy"></span><span class="over print"><strong>LEGO UMP</strong></span></a>
+      </div>
+    </div>
+        </div>
+      </div>
+      </div>
+      <a class="shanghai" id="shanghai" href="projects/apple.html"><span class="card"><img class="photo" src="images/shanghai.webp" alt=""></span></a>
+    </div>
+    <span id="apple-beat" data-beat="apple" data-text="It&#x27;s helped me secure opportunities not just with &lt;strong&gt;design&lt;/strong&gt;, but with process optimization and some &lt;strong class=&quot;ai&quot;&gt;enterprise AI&lt;/strong&gt;."></span>
+  </section>
 
-      if (fuurin) {
-        const a = Math.sin(t * 0.0011) * 5 + Math.sin(t * 0.0029) * 1.6
-                + Math.sin(t * 0.007) * Math.min(vel * 0.5, 12);
-        fuurin.style.transform = 'rotate(' + a.toFixed(2) + 'deg)';
-      }
-      requestAnimationFrame(loop);
-    }
-    if (!reduce) requestAnimationFrame(loop);
+  <section class="arts" id="arts" data-beat="arts" data-text="I also love connecting with people through music and design :) — whether it&#x27;s &lt;a href=&quot;projects/music.html&quot;&gt;campus bands &lt;svg class=&quot;tri right&quot; viewBox=&quot;0 0 10 9&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 9 L5 0 L10 9 Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt; or a niche YouTube community of &lt;a href=&quot;https://www.youtube.com/@melty-lego&quot;&gt;LEGO builders &lt;svg class=&quot;tri right&quot; viewBox=&quot;0 0 10 9&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 9 L5 0 L10 9 Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;">
+    <div class="cols">
+      <div>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-2.webp" alt=""></span><span class="over print"><strong>Somethin' Spice</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-3-1.webp" alt=""></span><span class="over print"><strong>HuskyJam</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-11.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-8.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><span class="ph">photo</span></span><span class="over print"><strong>Music</strong></span></a>
+      </div>
+      <div>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/dsc09359.webp" alt=""></span><span class="over print"><strong>Melody in the Stacks</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-16.webp" alt=""></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/171d6437f544dae54d4142a6165e625d.jpg" alt=""></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-4-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/general-pamphlet-frontside-final.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></a>
+      </div>
+      <div>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/img-5727.webp" alt=""></span><span class="over print"><strong>Kaede01</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-6.webp" alt=""></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/dsc09362.webp" alt=""></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/image-10.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></a>
+        <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/img-0476.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></a>
+      </div>
+      <span class="lens" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+    </div>
+  </section>
 
-    /* ======================================================================
-       2. selected works — click 01 (record) / 02 / 03 / 04 to swap the large preview
-       ====================================================================== */
-    const works = [
-      { title: 'summer internship', chip: 'What I was doing this summer', img: 'images/work-01-summer-internship.png',
-        desc: 'placeholder text — a short description of the summer internship goes here.' },
-      { title: 'current research', chip: 'What I am working on now', img: 'images/work-02-current-research.png',
-        desc: 'placeholder text — a short description of current research goes here.' },
-      { title: 'lego', chip: 'This is where it all started', img: 'images/work-03-lego.png',
-        desc: 'placeholder text — where it all started: a short note about lego goes here.' },
-      { title: 'projects', chip: 'What I have built', img: 'images/work-04-projects.png',
-        desc: 'placeholder text — a short description of projects goes here.' }
-    ];
-    const frame = $('#big-frame'), bigImg = $('#big-img'), bigChip = $('#big-chip'),
-          bigTitle = $('#big-title'), bigCap = $('#big-caption'), record = $('#record');
-    const thumbs = [...document.querySelectorAll('.thumb')];
-    works.forEach((w) => { const i = new Image(); i.src = w.img; });
+  <section class="about" id="about" data-beat="about" data-text="&lt;a href=&quot;mailto:hirotakayin@gmail.com&quot;&gt;Feel free to reach out &lt;svg class=&quot;tri right&quot; viewBox=&quot;0 0 10 9&quot; aria-hidden=&quot;true&quot;&gt;&lt;path d=&quot;M0 9 L5 0 L10 9 Z&quot;/&gt;&lt;/svg&gt;&lt;/a&gt;">
+    <div>
+      <div class="print">
+        <h3>Education</h3>
+        <div class="rows edu">
+          <span>Carnegie Mellon University</span><span>2025 - 2027</span>
+          <span>University of Washington</span><span>2021 - 2025</span>
+        </div>
+      </div>
+      <div class="print">
+        <h3>Software</h3>
+        <div class="rows soft">
+          <span>CAD</span><span>SolidWorks, OnShape</span><span>Robotics</span><span>ROS, RViz, Gazebo</span>
+          <span>Analysis</span><span>FEA, MATLAB</span><span>Code</span><span>Python, Bash, Git</span>
+          <span>Graphics</span><span>Adobe AE, PS</span><span>Tools</span><span>Linux CLI, MCP</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="print">
+        <h3>Proficient Languages</h3>
+        <p>English, Japanese, Mandarin</p>
+      </div>
+      <div>
+        <h3 class="print">Contact</h3>
+        <div class="contact">
+          <a href="mailto:hirotakayin@gmail.com" aria-label="email" title="email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 L12 13 L20.5 6.5"/></svg></a>
+          <a href="https://www.linkedin.com/in/hirotaka-yin" aria-label="linkedin" title="linkedin"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10.5 V16.5 M8 7.6 V7.7 M12 16.5 V10.5 M12 13 C12 11 16 10 16 13.2 V16.5"/></svg></a>
+          <a href="https://www.youtube.com/@melty-lego" aria-label="youtube" title="youtube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10 9.3 L15 12 L10 14.7 Z"/></svg></a>
+          <a href="https://github.com/hirotakayin" aria-label="github" title="github"><svg viewBox="0 0 24 24"><path d="M9 20 C4.5 21.5 4.5 17.5 3 17 M15 22 V18.3 C15 17.2 15.1 16.8 14.5 16.2 C17.3 15.9 20 14.8 20 10.5 C20 9.3 19.6 8.3 18.9 7.5 C19.2 6.6 19.2 5.5 18.8 4.6 C18.8 4.6 17.7 4.3 15.5 5.8 C13.6 5.3 10.4 5.3 8.5 5.8 C6.3 4.3 5.2 4.6 5.2 4.6 C4.8 5.5 4.8 6.6 5.1 7.5 C4.4 8.3 4 9.3 4 10.5 C4 14.8 6.7 15.9 9.5 16.2 C8.9 16.8 8.9 17.4 9 18.3 V22"/></svg></a>
+        </div>
+      </div>
+      <a class="resume-go print" href="resume.html">resume <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a>
+    </div>
+  </section>
 
-    let active = 0, swapTimer = null;
-    function select(i) {
-      if (i === active) return;
-      active = i;
-      const w = works[i];
-      thumbs.forEach((t) => t.setAttribute('aria-pressed', String(+t.dataset.i === i)));
-      record.classList.toggle('active', i === 0);
-
-      frame.classList.add('swap');
-      bigCap.style.opacity = 0;
-      clearTimeout(swapTimer);
-      swapTimer = setTimeout(() => {
-        bigImg.src = w.img;
-        bigImg.alt = w.title + ' preview';
-        bigTitle.textContent = w.title;
-        bigChip.innerHTML = w.chip + '<small>--&gt;</small>';
-        bigCap.textContent = w.desc;
-        frame.classList.remove('swap');
-        bigCap.style.opacity = 1;
-      }, 220);
-    }
-    thumbs.forEach((t) => t.addEventListener('click', () => select(+t.dataset.i)));
-    record.addEventListener('click', () => select(0));
-
-    /* ======================================================================
-       3. doodle tools: pen / sticker / undo (drawn over the hero)
-       ====================================================================== */
-    const hero = $('#top'), cv = $('#doodle'), ctx = cv.getContext('2d');
-    const penBtn = $('#tool-pen'), stkBtn = $('#tool-sticker'), undoBtn = $('#tool-undo');
-    const items = [];            // {type:'stroke'|'sticker', ...} in 0..1 coords
-    let tool = null, cur = null, W = 1, H = 1;
-    const COLORS = ['#c41230', '#7ba8ad', '#a9b8f6', '#e8a317'];
-
-    function resize() {
-      const r = hero.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      W = r.width; H = r.height;
-      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      redraw();
-    }
-    function drawSticker(s) {
-      const x = s.x * W, y = s.y * H, r = s.r * W;
-      ctx.save(); ctx.translate(x, y); ctx.rotate(s.rot); ctx.fillStyle = s.color;
-      ctx.strokeStyle = '#111'; ctx.lineWidth = 1.5; ctx.lineJoin = 'round';
-      ctx.beginPath();
-      if (s.kind === 0) {                       // star
-        for (let i = 0; i < 10; i++) {
-          const rr = i % 2 ? r * 0.45 : r, a = (Math.PI / 5) * i - Math.PI / 2;
-          ctx[i ? 'lineTo' : 'moveTo'](Math.cos(a) * rr, Math.sin(a) * rr);
-        }
-        ctx.closePath();
-      } else if (s.kind === 1) {                // heart
-        ctx.moveTo(0, r * 0.8);
-        ctx.bezierCurveTo(-r * 1.4, -r * 0.1, -r * 0.6, -r * 1.1, 0, -r * 0.35);
-        ctx.bezierCurveTo(r * 0.6, -r * 1.1, r * 1.4, -r * 0.1, 0, r * 0.8);
-      } else {                                  // flower
-        for (let i = 0; i < 5; i++) {
-          const a = (Math.PI * 2 / 5) * i;
-          ctx.moveTo(Math.cos(a) * r * 0.55 + r * 0.45, Math.sin(a) * r * 0.55);
-          ctx.arc(Math.cos(a) * r * 0.55, Math.sin(a) * r * 0.55, r * 0.45, 0, Math.PI * 2);
-        }
-      }
-      ctx.fill(); ctx.stroke(); ctx.restore();
-    }
-    function drawStroke(s) {
-      if (s.pts.length < 2) return;
-      ctx.strokeStyle = '#111'; ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      ctx.beginPath();
-      s.pts.forEach((p, i) => ctx[i ? 'lineTo' : 'moveTo'](p[0] * W, p[1] * H));
-      ctx.stroke();
-    }
-    function redraw() {
-      ctx.clearRect(0, 0, W, H);
-      items.forEach((it) => (it.type === 'stroke' ? drawStroke(it) : drawSticker(it)));
-      if (cur) drawStroke(cur);
-      undoBtn.disabled = items.length === 0;
-    }
-    function setTool(t) {
-      tool = tool === t ? null : t;
-      penBtn.setAttribute('aria-pressed', String(tool === 'pen'));
-      stkBtn.setAttribute('aria-pressed', String(tool === 'sticker'));
-      cv.className = tool ? 'on ' + tool : '';
-    }
-    penBtn.addEventListener('click', () => setTool('pen'));
-    stkBtn.addEventListener('click', () => setTool('sticker'));
-    undoBtn.addEventListener('click', () => { items.pop(); redraw(); });
-
-    function pos(e) {
-      const r = cv.getBoundingClientRect();
-      return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height];
-    }
-    cv.addEventListener('pointerdown', (e) => {
-      if (!tool) return;
-      const p = pos(e);
-      if (tool === 'pen') {
-        cv.setPointerCapture(e.pointerId);
-        cur = { type: 'stroke', pts: [p] };
-      } else {
-        items.push({ type: 'sticker', x: p[0], y: p[1], r: 0.016 + Math.random() * 0.01,
-                     kind: Math.floor(Math.random() * 3), color: COLORS[Math.floor(Math.random() * COLORS.length)],
-                     rot: (Math.random() - 0.5) * 0.9 });
-      }
-      redraw();
-    });
-    cv.addEventListener('pointermove', (e) => { if (cur) { cur.pts.push(pos(e)); redraw(); } });
-    const endStroke = () => { if (cur) { items.push(cur); cur = null; redraw(); } };
-    cv.addEventListener('pointerup', endStroke);
-    cv.addEventListener('pointercancel', endStroke);
-    window.addEventListener('resize', resize);
-    window.addEventListener('load', resize);
-    resize();
-  })();
-  </script>
+  <script src="logo.js"></script>
+  <script src="site.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>

@@ -3,617 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>victor yin — 3d resume & projects</title>
+  <title>victor yin — projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
   <style>
-    /* ==========================================================================
-       MONOTONE DESIGN SYSTEM (MATCHING HOME PAGE)
-       ========================================================================== */
-    :root {
-      --bg: #fafafa;
-      --text: #0a0a0a;
-      --text-muted: #666666;
-      --border-subtle: #e5e5e5;
-      --accent-green: #39ff14;
-      --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-main);
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ==========================================================================
-       HEADER NAV BAR
-       ========================================================================== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      background: rgba(250, 250, 250, 0.9);
-      backdrop-filter: blur(12px);
-      padding: 1.25rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .nav-left, .nav-right {
-      display: flex;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .nav-link {
-      font-size: 0.95rem;
-      font-weight: 500;
-      text-transform: lowercase;
-      color: var(--text);
-      text-decoration: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .nav-link:hover {
-      opacity: 0.5;
-    }
-
-    .nav-link.active {
-      font-weight: 700;
-      border-bottom: 2px solid var(--text);
-    }
-
-    .nav-center {
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      text-transform: lowercase;
-    }
-
-    /* ==========================================================================
-       3D VIEWPORT CANVAS & HUD
-       ========================================================================== */
-    .canvas-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background-color: var(--bg);
-      cursor: grab;
-      user-select: none;
-    }
-
-    .canvas-container:active {
-      cursor: grabbing;
-    }
-
-    #webgl-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* Overlay Control HUD */
-    .hud-overlay {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 3rem;
-      right: 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    .hud-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      pointer-events: auto;
-    }
-
-    .hud-title {
-      color: var(--text);
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--accent-green);
-      display: inline-block;
-    }
-
-    .hud-controls {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .hud-btn {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      color: var(--text);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .hud-btn:hover {
-      background: var(--text);
-      color: #ffffff;
-    }
-
-    /* Responsive adjustment */
-    @media (max-width: 768px) {
-      .header { padding: 1rem 1.5rem; }
-      .hud-overlay { left: 1.5rem; right: 1.5rem; bottom: 1.5rem; flex-direction: column; gap: 1rem; align-items: stretch; }
-    }
+    main { width: 132rem; margin-left: 29.5rem; padding: 14rem 0 12rem; }
+    h1 { font-size: 3.2rem; }
+    .sec { margin: 6rem 0 2.4rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0, 0, 0, .25); font-size: 1.8rem; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.4rem; align-items: start; }
+    .big { grid-column: span 6; }
+    .mid { grid-column: span 4; }
+    .small { grid-column: span 3; }
+    .grid .ph { aspect-ratio: 16 / 10; min-height: 0; }
+    .grid img { aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
   </style>
-
-  <!-- Three.js Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body>
+<body class="paper">
+  <!-- letterpress look: edges wander a little and the ink drops out in specks -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="print-text" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".1875" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -1.075" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+    <filter id="print-img" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".2125" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .8 0 0 0 -.56" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+  </svg>
 
-  <!-- HEADER NAVIGATION -->
-  <header class="header">
-    <nav class="nav-left">
-      <a class="nav-link" href="index.html">home</a>
-    </nav>
-
-    <div class="nav-center" id="live-clock">
-      pittsburgh 00:00:00
-    </div>
-
-    <nav class="nav-right">
-      <a class="nav-link active" href="projects.html">projects & resume</a>
-      <a class="nav-link" href="music.html">music & art</a>
-      <a class="nav-link" href="index.html#about">about</a>
-    </nav>
+  <header class="nav">
+    <a class="n-home" href="index.html">home</a>
+    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
+    <a class="n-projects active" href="projects.html">projects</a>
+    <a class="n-resume" href="resume.html">resume</a>
   </header>
 
-  <!-- 3D INTERACTIVE CANVAS CONTAINER -->
-  <div class="canvas-container" id="canvas-container">
-    <canvas id="webgl-canvas"></canvas>
+  <main>
+    <h1 class="print">projects</h1>
 
-    <!-- HUD OVERLAY -->
-    <div class="hud-overlay">
-      <div class="hud-card">
-        <div class="hud-title">
-          <span class="status-dot"></span> 3D Interactive Sheet Viewer
-        </div>
-        <div>• Click & Drag to inspect document (Drag sensitivity: 0.5x)</div>
-        <div>• Scroll to zoom in/out | Hover to pause rotation</div>
-      </div>
-
-      <div class="hud-controls">
-        <button class="hud-btn" onclick="resetView()">[ Reset View ]</button>
-        <a class="hud-btn" href="#" id="download-btn" onclick="alert('Opening official PDF resume...'); return false;">[ Open PDF ]</a>
-      </div>
+    <h2 class="sec print">Engineering</h2>
+    <div class="grid">
+      <a class="tile mid" href="projects/apple.html"><span class="art"><img class="ink" src="images/apple-dc.webp" alt="" loading="lazy"></span><span class="over print"><strong>Apple Internship</strong></span></a>
+      <a class="tile mid" href="projects/drones.html"><span class="art"><span class="ph">drone image</span></span><span class="over print"><strong>CMU CERLAB</strong></span></a>
+      <a class="tile mid" href="projects/kamome.html"><span class="art"><img class="ink" src="images/sun-lab.webp" alt="" loading="lazy"></span><span class="over print"><strong>UW Sun Lab</strong></span></a>
+      <a class="tile mid" href="projects/manta-ray.html"><span class="art"><span class="ph">manta-ray image</span></span><span class="over print"><strong>Soft Robotics</strong></span></a>
+      <a class="tile mid" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/capstone.webp" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone</strong></span></a>
+      <a class="tile mid" href="projects/phil-up.html"><span class="art"><img class="ink" src="images/phil-up.webp" alt="" loading="lazy"></span><span class="over print"><strong>Phil-Up</strong></span></a>
     </div>
-  </div>
 
-  <script>
-    /* ==========================================================================
-       1. LIVE PITTSBURGH CLOCK
-       ========================================================================== */
-    function updateClock() {
-      const options = {
-        timeZone: 'America/New_York',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      };
-      const pittsburghTime = new Intl.DateTimeFormat('en-US', options).format(new Date());
-      const clockElem = document.getElementById('live-clock');
-      if (clockElem) clockElem.textContent = `pittsburgh ${pittsburghTime}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+    <h2 class="sec print">Music &amp; Community</h2>
+    <div class="grid">
+      <a class="tile mid" href="projects/music.html"><span class="art"><span class="ph">music image</span></span><span class="over print"><strong>Music</strong></span></a>
+      <a class="tile mid" href="projects/graphic-design.html"><span class="art"><span class="ph">graphic design image</span></span><span class="over print"><strong>Graphic Design</strong></span></a>
+      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink" src="images/lego.webp" alt="" loading="lazy"></span><span class="over print"><strong>melty's LEGO</strong></span></a>
+    </div>
 
-    /* ==========================================================================
-       2. RESUME HIGH-DPI CANVAS TEXTURE GENERATOR
-       ========================================================================== */
-    function createResumeTexture() {
-      const canvas = document.createElement('canvas');
-      // High resolution for sharp crisp vector-like text rendering (8.5 x 11 aspect)
-      canvas.width = 1700;
-      canvas.height = 2200;
-      const ctx = canvas.getContext('2d');
+  </main>
 
-      // Clean paper background (Matching home page light palette)
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Subtle paper border line
-      ctx.strokeStyle = '#e0e0e0';
-      ctx.lineWidth = 4;
-      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
-
-      // Text styling setup
-      ctx.fillStyle = '#0a0a0a';
-      ctx.textBaseline = 'top';
-
-      let y = 90;
-      const margin = 100;
-      const contentWidth = canvas.width - margin * 2;
-
-      // Helper: Draw Section Divider Header
-      function drawSectionHeader(title) {
-        y += 15;
-        ctx.font = 'bold 30px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.fillStyle = '#0a0a0a';
-        ctx.fillText(title.toUpperCase(), margin, y);
-        y += 38;
-        
-        ctx.strokeStyle = '#0a0a0a';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(margin, y);
-        ctx.lineTo(canvas.width - margin, y);
-        ctx.stroke();
-        y += 20;
-      }
-
-      // Helper: Word Wrap Bullet Points
-      function drawBulletPoint(text, indent = 30) {
-        ctx.font = '22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.fillStyle = '#222222';
-        
-        const bulletSymbol = '• ';
-        const x = margin + indent;
-        const maxWidth = contentWidth - indent;
-        
-        const words = text.split(' ');
-        let line = bulletSymbol;
-        const lineHeight = 32;
-
-        for (let n = 0; n < words.length; n++) {
-          let testLine = line + words[n] + ' ';
-          let metrics = ctx.measureText(testLine);
-          if (metrics.width > maxWidth && n > 0) {
-            ctx.fillText(line, x, y);
-            line = '   ' + words[n] + ' ';
-            y += lineHeight;
-          } else {
-            line = testLine;
-          }
-        }
-        ctx.fillText(line, x, y);
-        y += lineHeight + 6;
-      }
-
-      // --- HEADER ---
-      ctx.font = 'bold 54px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('HIROTAKA (VICTOR) YIN', margin, y);
-      y += 65;
-
-      ctx.font = '22px "SFMono-Regular", Consolas, monospace';
-      ctx.fillStyle = '#444444';
-      ctx.fillText('Pittsburgh, PA  |  (206) 532-6091  |  victory@andrew.cmu.edu  |  linkedin.com/in/hirotaka-yin', margin, y);
-      y += 45;
-
-      // --- EDUCATION ---
-      drawSectionHeader('Education');
-
-      // CMU
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('Carnegie Mellon University', margin, y);
-      ctx.font = '24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('Pittsburgh, PA', canvas.width - margin - 180, y);
-      y += 32;
-
-      ctx.font = 'italic 23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#333333';
-      ctx.fillText('Master of Science in Mechanical Engineering | GPA: 3.99/4.0', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('Expected December 2027', canvas.width - margin - 260, y);
-      y += 32;
-
-      ctx.font = '22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#444444';
-      ctx.fillText('Relevant Coursework: Robotics Control, Systems Design, Embedded Computing, Computer Vision (CV), Statistical Analysis', margin, y);
-      y += 45;
-
-      // UW
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('University of Washington', margin, y);
-      ctx.font = '24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('Seattle, WA', canvas.width - margin - 140, y);
-      y += 32;
-
-      ctx.font = 'italic 23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#333333';
-      ctx.fillText('Bachelor of Science in Mechanical Engineering | GPA: 3.84/4.0', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('June 2025', canvas.width - margin - 120, y);
-      y += 45;
-
-      // --- SKILLS ---
-      drawSectionHeader('Skills');
-      
-      const skills = [
-        ['Manufacturing:', 'DFM, GD&T, Tolerance Analysis, Six-Sigma; CNC Machining, Plastic/Metal Part Design, Actuator Mechanisms'],
-        ['Software:', 'SolidWorks, OnShape, FEA (ANSYS), MATLAB, ROS, RViz, Adobe Creative Suite, Microsoft 365'],
-        ['Programming:', 'Python, Bash/Shell, Linux CLI, Git, CI/CD, MCP Frameworks'],
-        ['Languages:', 'English, Japanese (Native), Mandarin (Professional Working Proficiency)']
-      ];
-
-      skills.forEach(([label, detail]) => {
-        ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.fillStyle = '#0a0a0a';
-        ctx.fillText(label, margin, y);
-        
-        ctx.font = '22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.fillStyle = '#333333';
-        ctx.fillText(detail, margin + 180, y);
-        y += 32;
-      });
-      y += 15;
-
-      // --- WORK EXPERIENCE ---
-      drawSectionHeader('Work Experience');
-
-      // Apple
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('iPhone Product Design Intern | Apple', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('Shanghai & Shenzhen, China', canvas.width - margin - 310, y);
-      y += 30;
-      ctx.font = 'italic 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#555555';
-      ctx.fillText('March 2026 – August 2026', margin, y);
-      y += 35;
-
-      drawBulletPoint('Conducted systems-level failure analysis through fault injection and commonality analysis of Cpk and specification mean shifts; collaborated with upstream vendors and CMs to execute targeted material, fixture process and machine mitigation strategies, boosting process capability and units-per-hour (UPH) while capping part reject rates below 0.02%.');
-      drawBulletPoint('Engineered an end-to-end pipeline combining classical CV and deep learning models to automate display screen defect detection, outperforming human inspection reliability and addressing a primary UPH bottleneck. Delivered data-driven metrics that galvanized key interdepartmental stakeholders to drive a cross-functional initiative with automation vendors for inline factory integration.');
-      drawBulletPoint('Led development of a multi-agentic platform used by in-region teams by leveraging specialized LLM agents across manufacturing enterprise databases, expanding cloud analysis capabilities and cutting response latency by 50% to drive smarter, faster decisions.');
-      y += 15;
-
-      // --- RESEARCH EXPERIENCE ---
-      drawSectionHeader('Research Experience');
-
-      // CERLAB
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('CERLAB with Dr. Kenji Shimada | Carnegie Mellon University', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('August 2025 – Present', canvas.width - margin - 260, y);
-      y += 35;
-
-      drawBulletPoint('Developed and validated 3D reinforcement learning-based local planners for autonomous UAVs using a Sim2Real workflow with ROS, Gazebo and RViz, resolving computational bottlenecks of previous probabilistic roadmap (PRM) algorithms when exploring large environments and delivering up to a 50% improvement in real-time trajectory generation latency.');
-      drawBulletPoint('Designed custom LiDAR orientations and optimized airframe mechanics, improving flight stability and expanding below-horizon obstacle detection by 30% to reinforce localized mapping and collision avoidance in descent trajectories.');
-      y += 15;
-
-      // Sun Lab
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('Sun Laboratory with Dr. Shijing Sun | University of Washington', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('October 2023 – August 2025', canvas.width - margin - 310, y);
-      y += 35;
-
-      drawBulletPoint('Designed an automated spectrometry device and integrated it into a closed-loop Bayesian optimization workflow via an Opentrons lab robot, improving inspection throughput by 4x compared to manual methods to enable accelerated property optimization of solar cell materials for clean energy development.');
-      drawBulletPoint('Authored research and presented on AI-driven workflows for laboratory process automation (DOI: 10.5206/joh.v9i1.23044).');
-      y += 15;
-
-      // --- PROJECTS ---
-      drawSectionHeader('Projects');
-
-      // Underwater Inspection Robot
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('Underwater Inspection Robot | Soft-Robotics Project, Carnegie Mellon University', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('Oct 2025 – Dec 2025', canvas.width - margin - 230, y);
-      y += 35;
-
-      drawBulletPoint('Designed novel actuation mechanisms for a bio-inspired stingray robot by combining soft materials with Shape Memory Alloy (SMA) actuators, improving propulsion efficiency by 15% and minimizing sediment disturbance for applications in marine monitoring.');
-      drawBulletPoint('Engineered TPU seals and multi-stage silicone molding processes to mitigate fluid intrusion into SMA wires, leveraging deformation FEA to optimize seal compression and waterproofing reliability without compromising ease-of-assembly.');
-      y += 15;
-
-      // Autonomous Cleaning Robot
-      ctx.font = 'bold 26px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillText('Autonomous Cleaning Robot | Senior Capstone Project, University of Washington', margin, y);
-      ctx.font = '23px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('Jan 2025 – June 2025', canvas.width - margin - 230, y);
-      y += 35;
-
-      drawBulletPoint('Conducted Kano analysis to identify key subsystem requirements and designed modular snap-fit chassis assemblies, enabling rapid subsystem-prototyping, streamlining design down-selection and cutting development time by 2 weeks.');
-      drawBulletPoint('Engineered high-torque drivetrains and built MATLAB simulations to validate navigation capabilities, improving speed, load capacity and traversal reliability to meet customer needs, while optimizing for assembly and fabrication across a team of 5.');
-
-      return new THREE.CanvasTexture(canvas);
-    }
-
-    /* ==========================================================================
-       3. THREE.JS 3D SCENE SETUP & DRAG PHYSICS (REMOVED BOBBING, 0.5X DRAG)
-       ========================================================================== */
-    const container = document.getElementById('canvas-container');
-    const canvas = document.getElementById('webgl-canvas');
-
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xfafafa); // Matching home page light background
-
-    // Perspective Camera setup
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 14);
-
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-    // Lighting (Clean soft studio illumination)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
-    scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
-    dirLight.position.set(5, 10, 7);
-    dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width = 2048;
-    dirLight.shadow.mapSize.height = 2048;
-    dirLight.shadow.bias = -0.0001;
-    scene.add(dirLight);
-
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.25);
-    fillLight.position.set(-5, -5, 5);
-    scene.add(fillLight);
-
-    // Create 3D Paper Mesh (8.5 x 11 aspect ratio: 6.8 units wide x 8.8 units tall)
-    const paperWidth = 6.8;
-    const paperHeight = 8.8;
-    const geometry = new THREE.PlaneGeometry(paperWidth, paperHeight, 32, 32);
-
-    const resumeTexture = createResumeTexture();
-    resumeTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-
-    // Material with double-sided rendering
-    const paperMaterial = new THREE.MeshStandardMaterial({
-      map: resumeTexture,
-      roughness: 0.4,
-      metalness: 0.05,
-      side: THREE.DoubleSide
-    });
-
-    const paperMesh = new THREE.Mesh(geometry, paperMaterial);
-    paperMesh.castShadow = true;
-    paperMesh.receiveShadow = true;
-    
-    // Explicitly fixed origin position — NO BOBBING
-    paperMesh.position.set(0, 0, 0);
-    scene.add(paperMesh);
-
-    // Subtle drop shadow catcher plane behind the paper
-    const shadowPlaneGeo = new THREE.PlaneGeometry(20, 20);
-    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.08 });
-    const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowMat);
-    shadowPlane.position.z = -0.6;
-    shadowPlane.receiveShadow = true;
-    scene.add(shadowPlane);
-
-    /* ==========================================================================
-       4. DRAG CONTROLS WITH 2X SMALLER SENSITIVITY (0.0025)
-       ========================================================================== */
-    let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-    let targetRotationX = 0;
-    let targetRotationY = 0;
-    
-    // DRAG SENSITIVITY: Exactly 2x smaller than standard (0.0025)
-    const DRAG_SENSITIVITY = 0.0025;
-
-    function onPointerDown(e) {
-      isDragging = true;
-      previousMousePosition = {
-        x: e.clientX || (e.touches && e.touches[0].clientX) || 0,
-        y: e.clientY || (e.touches && e.touches[0].clientY) || 0
-      };
-    }
-
-    function onPointerMove(e) {
-      if (!isDragging) return;
-
-      const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-      const currentY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-
-      const deltaX = currentX - previousMousePosition.x;
-      const deltaY = currentY - previousMousePosition.y;
-
-      // Apply 0.5x smaller sensitivity rotation
-      targetRotationY += deltaX * DRAG_SENSITIVITY;
-      targetRotationX += deltaY * DRAG_SENSITIVITY;
-
-      // Clamp X rotation so paper doesn't flip completely upside down
-      targetRotationX = Math.max(-Math.PI / 2.5, Math.min(Math.PI / 2.5, targetRotationX));
-
-      previousMousePosition = { x: currentX, y: currentY };
-    }
-
-    function onPointerUp() {
-      isDragging = false;
-    }
-
-    // Scroll to Zoom
-    function onWheel(e) {
-      e.preventDefault();
-      camera.position.z += e.deltaY * 0.008;
-      camera.position.z = Math.max(6, Math.min(22, camera.position.z));
-    }
-
-    container.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerUp);
-
-    container.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
-    window.addEventListener('touchend', onPointerUp);
-    container.addEventListener('wheel', onWheel, { passive: false });
-
-    // Reset View Function
-    function resetView() {
-      targetRotationX = 0;
-      targetRotationY = 0;
-      camera.position.set(0, 0, 14);
-    }
-
-    /* ==========================================================================
-       5. RENDER LOOP (STRICTLY NO BOBBING UP AND DOWN)
-       ========================================================================== */
-    function animate() {
-      requestAnimationFrame(animate);
-
-      // Smooth inertia interpolation towards target rotation
-      paperMesh.rotation.y += (targetRotationY - paperMesh.rotation.y) * 0.08;
-      paperMesh.rotation.x += (targetRotationX - paperMesh.rotation.x) * 0.08;
-
-      // NOTE: paperMesh.position.y remains fixed at 0. No sine wave bobbing.
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // Window Resize Handler
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>

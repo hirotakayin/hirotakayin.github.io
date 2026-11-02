@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>victor yin — Senior Capstone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="../project.css">
+</head>
+<body class="paper">
+  <!-- letterpress look: edges wander a little and the ink drops out in specks -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="print-text" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".1875" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -1.075" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+    <filter id="print-img" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".2125" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .8 0 0 0 -.56" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+  </svg>
+
+  <header class="nav">
+    <a class="n-home" href="../index.html">home</a>
+    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
+    <a class="n-projects active" href="../projects.html">projects</a>
+    <a class="n-resume" href="../resume.html">resume</a>
+  </header>
+
+  <main class="layout">
+    <section class="row">
+      <div class="group"><figure><img class="ink" src="../images/capstone.webp" alt=""></figure></div>
+      <div class="text print">
+        <h1>Senior Capstone</h1>
+        <p class="when">University of Washington · January – June 2025</p>
+        <p>An autonomous cleaning robot built by a team of 5, plus TreeTop Sweets, the mini capstone that came before it.</p>
+        <p class="skills-title">Skills</p>
+        <div class="skills"><span>Kano analysis</span><span>Snap-fit design</span><span>Drivetrain design</span><span>MATLAB simulation</span><span>LEGO mechanisms</span><span>Team leadership</span></div>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">chassis prototypes</div></figure></div>
+      <div class="text print">
+        <h2>Modular by design</h2>
+        <p>I conducted Kano analysis to identify key subsystem requirements, then designed modular snap-fit chassis assemblies. They enabled rapid subsystem prototyping, streamlined design down-selection and cut development time by 2 weeks.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">drivetrain and simulation</div></figure></div>
+      <div class="text print">
+        <h2>Drivetrain and navigation</h2>
+        <p>I engineered high-torque drivetrains and built MATLAB simulations to validate navigation capabilities, improving speed, load capacity and traversal reliability to meet customer needs, while optimizing for assembly and fabrication.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">TreeTop Sweets poster pitch</div></figure></div>
+      <div class="text print">
+        <h2>TreeTop Sweets</h2>
+        <p>During Autumn quarter 2024, I proposed a new candy dispenser to improve student engagement during advising hours. Leading a team of 3 other students, I took it through ideation, design and manufacturing as a highly structured mini capstone.</p><p>It won first place in a cohort-wide competition, and went on to be used by the ME department's advisor.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">initial sketch</div></figure><figure><div class="ph">detailed design</div></figure></div>
+      <div class="text print">
+        <h2>Designing it in LEGO</h2>
+        <p>With only 2 months, we chose LEGO for both robust function and a polished look. I handled all of the digital design, while my teammates worked on the 3D printed and acrylic parts.</p><p>The timeline only allowed ordering 1 complete prototype, so careful planning and active discussion had to catch problems early. We created the mechanism entirely digitally, and it tested without stability or reliability issues.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">outer structure development</div></figure></div>
+      <div class="text print">
+        <h2>Gears and structure</h2>
+        <p>A 1.8:1 reduction gear ratio overcame friction forces when moving the slider.</p><p>The structure is heavily reinforced with cross-beams, then covered in detailed sculptures of the tree trunk and foliage, making it both more striking and very robust.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">backup model</div></figure></div>
+      <div class="text print">
+        <h2>The backup plan</h2>
+        <p>Shipping delays meant we also had to build a backup model from a random assortment of bricks in the lab. We got it fully functional, and made up for the missing aesthetics with cardboard and acrylic.</p>
+        <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../site.js"></script>
+</body>
+</html>

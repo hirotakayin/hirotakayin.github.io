@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>victor yin — melty's LEGO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="../project.css">
+</head>
+<body class="paper">
+  <!-- letterpress look: edges wander a little and the ink drops out in specks -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="print-text" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".1875" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -1.075" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+    <filter id="print-img" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".2125" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .8 0 0 0 -.56" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+  </svg>
+
+  <header class="nav">
+    <a class="n-home" href="../index.html">home</a>
+    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
+    <a class="n-projects active" href="../projects.html">projects</a>
+    <a class="n-resume" href="../resume.html">resume</a>
+  </header>
+
+  <main class="layout">
+    <section class="row">
+      <div class="group"><figure><img class="ink" src="../images/lego.webp" alt=""></figure></div>
+      <div class="text print">
+        <h1>melty's LEGO</h1>
+        
+        <p>My journey on <a href="https://www.youtube.com/@melty-lego">YouTube</a> started 7 years ago, when I found a community of LEGO Nerf gun builders. I learned from tutorials, then spent all my free time reverse engineering other people's mechanisms to recreate and improve them. I distinctly remember my grandmother yelling at me to come eat or go to sleep.</p>
+        <p class="skills-title">Skills</p>
+        <div class="skills"><span>Mechanism design</span><span>Reverse engineering</span><span>Digital modeling</span><span>Video production</span></div>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/Fpf09SEQwuE" title="Version 1: proof of concept" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=Fpf09SEQwuE">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a><figcaption class="print">Version 1: proof of concept</figcaption></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/yPEDpXYdRqQ" title="Version 2: improved mechanism" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=yPEDpXYdRqQ">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a><figcaption class="print">Version 2: improved mechanism</figcaption></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/bg9nXTB8Ssc" title="Version 3 (in progress): reliable mechanism" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=bg9nXTB8Ssc">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a><figcaption class="print">Version 3 (in progress): reliable mechanism</figcaption></figure></div>
+      <div class="text print">
+        <h2>Ultra-realistic shell-ejecting replicas</h2>
+        <p>With more experience, I began inventing my own mechanisms, pioneering ultra-realistic LEGO models that combine shell ejection, blowback and hammer-based triggers in a compact form.</p><p>The series runs from a proof of concept, to an improved mechanism, to a reliable mechanism still in progress.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/QHh2DhT3U2g" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=QHh2DhT3U2g">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ztA9Wan5Ai8" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=ztA9Wan5Ai8">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/KzBE7ij1f1o" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=KzBE7ij1f1o">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/Jlt7-_IYWhM" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=Jlt7-_IYWhM">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure></div>
+      <div class="text print">
+        <h2>Brick-shooting replicas</h2>
+        <p>Functional in classic Nerf fashion.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/3fbGIws4nYc" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=3fbGIws4nYc">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/J3brTOjoSBw" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=J3brTOjoSBw">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure><figure><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/WnMIDQZWrfg" title="video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="watch print" href="https://www.youtube.com/watch?v=WnMIDQZWrfg">watch on YouTube <svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg></a></figure></div>
+      <div class="text print">
+        <h2>Non-functional replicas</h2>
+        <p>Aesthetic, accurate replicas with basic functionality: disassembly, a moving slide and blowback.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">trains and airplanes</div></figure></div>
+      <div class="text print">
+        <h2>Other models</h2>
+        <p>Other LEGO models, including trains and airplanes.</p>
+        <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../site.js"></script>
+</body>
+</html>

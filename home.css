@@ -1,0 +1,151 @@
+html { scroll-behavior: smooth; }
+
+/* ========================= tracing paper: sheets over the grid, torn where sections change ========================= */
+.bg {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; isolation: isolate; background-color: #fff;
+  background-image: linear-gradient(rgba(60, 60, 60, .24) 1px, transparent 1px), linear-gradient(90deg, rgba(60, 60, 60, .24) 1px, transparent 1px);
+  background-size: 5.2rem 5.2rem;
+}
+.strip { position: absolute; left: 0; width: 192rem; height: 30rem; }
+.sheet-fill { position: absolute; left: 0; right: 0; background: rgba(250, 250, 248, .8); }
+.bg::after { content: ""; position: absolute; inset: 0; background: url("images/grain.webp") 0 0 / 768px; mix-blend-mode: multiply; }
+
+.nav-sky { position: absolute; left: calc(30.5rem + 3.2 * var(--t)); top: 50%; width: 15.5rem; height: auto; transform: translateY(-50%); pointer-events: none; }
+
+/* ========================= fuurin: both images share a scale, 6rem = 315px of the bell ========================= */
+.fuurin { position: fixed; z-index: 3; left: 11.5rem; top: 6.6rem; width: 6rem; transform-origin: 2.76rem .305rem; pointer-events: none; }
+.fuurin img { display: block; width: 100%; height: auto; pointer-events: auto; cursor: pointer; }
+.fuurin .tanzaku { position: absolute; left: 0; top: 0; width: 3.79rem; max-width: none; translate: .02rem 6.075rem; transform-origin: 2.59rem .535rem; }
+
+/* ========================= text and images that stay on screen ========================= */
+.overlay { position: fixed; z-index: 4; left: 105.6rem; top: 9rem; width: 62rem; pointer-events: none; transition: opacity .3s; }
+.overlay[data-beat="none"] { opacity: 0; }
+.overlay[data-beat="none"] * { pointer-events: none !important; }
+.words { position: relative; transition: transform .22s cubic-bezier(.42, 0, 1, 1); }
+.words > * { transition: opacity .22s cubic-bezier(.42, 0, 1, 1); }
+/* the next caption replaces this one by rising in, instead of typing */
+.words.card-out { transform: translateY(-1.6rem); }
+.words.card-from { transform: translateY(2.4rem); transition: none; }
+.words.card-in { transition: transform .5s cubic-bezier(.45, 0, .2, 1); }
+/* only over pictures: a blur with no tint, fading out at its edges */
+.words::before {
+  content: ""; position: absolute; inset: -3rem -4rem; opacity: 0; transition: opacity .3s; backdrop-filter: blur(1.2rem);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4rem, #000 calc(100% - 4rem), transparent), linear-gradient(transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4rem, #000 calc(100% - 4rem), transparent), linear-gradient(transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+}
+.overlay.over .words::before { opacity: 1; }
+/* the words and the blur fade separately: fading their parent would turn the blur off until it finished */
+.overlay .words.card-out > *, .overlay .words.card-out::before { opacity: 0; transition: opacity .22s cubic-bezier(.42, 0, 1, 1); }
+.overlay .words.card-from > *, .overlay .words.card-from::before { opacity: 0; transition: none; }
+.overlay .words.card-in > *, .overlay .words.card-in::before { transition: opacity .5s cubic-bezier(.45, 0, .2, 1); }
+.words > .print { position: relative; }
+.lead { font-size: max(14px, 1.8rem); line-height: 1.35; pointer-events: auto; transition: opacity .12s; }
+.lead.fading { opacity: 0; }
+.lead a { font-weight: 600; }
+.lead a:hover, .extra a:hover, a.extra:hover, .resume-go:hover { opacity: .6; }
+/* room for the longest intro line, so the images below never move */
+.overlay[data-beat="me"] .lead, .overlay[data-beat="cerlab"] .lead, .overlay[data-beat="sun"] .lead,
+.overlay[data-beat="cad"] .lead, .overlay[data-beat="apple"] .lead { min-height: var(--lead-h, 5rem); }
+.caret { display: none; width: 1px; height: 1.05em; margin: 0 .1rem; vertical-align: -.14em; background: var(--ink); }
+.caret.show { display: inline-block; animation: blink 1.05s steps(1) infinite; }
+.caret.show.busy { animation: none; }
+@keyframes blink { 50% { opacity: 0; } }
+.ai { background: linear-gradient(90deg, #2f6bff, #8a3dff 60%, #c34dff); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 700; }
+
+.extras { position: relative; height: 2.8rem; margin-top: 1.2rem; font-size: var(--t); }
+.overlay[data-beat="apple"] .extras { height: 7.6rem; }
+.extra { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 2.4rem; height: 2.8rem; opacity: 0; pointer-events: none; white-space: nowrap; }
+.more, .see, .summer { gap: .5rem; font-weight: 600; }
+.links a { font-weight: 600; }
+.overlay[data-beat="me"] .links,
+.overlay[data-beat="cerlab"] .more, .overlay[data-beat="sun"] .more,
+.overlay[data-beat="cad"] .see, .overlay[data-beat="apple"] .summer { opacity: 1; pointer-events: auto; transition: opacity .3s; }
+.summer { top: 4.8rem; }
+.lg { flex: none; width: 2.8rem; height: 2.8rem; margin-right: .5rem; background: var(--ink); opacity: 0; -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; }
+
+.media { position: relative; aspect-ratio: 16 / 9; margin-top: 2.4rem; }
+.media-set { position: absolute; inset: 0; display: grid; opacity: 0; pointer-events: none; transition: opacity .4s; }
+.media-set.on { opacity: 1; pointer-events: auto; }
+.media-set .tile, .media-set .art { height: 100%; }
+.media-set img { height: 100%; object-fit: cover; }
+
+/* ========================= 1. postcards: each holds still, then the next stacks over it ========================= */
+.story { position: relative; display: grid; gap: 19rem; width: 71rem; margin-left: 29.5rem; padding: 9rem 0 63rem; }
+.view { position: relative; display: block; filter: drop-shadow(0 .8rem 1.6rem rgba(0, 0, 0, .16)); }
+.view:nth-child(1) { transform: rotate(-.5deg); }
+.view:nth-child(2) { transform: rotate(.55deg); }
+.view:nth-child(3) { transform: rotate(-.3deg); }
+/* the picture stays square on a sheet of torn white paper */
+.card { position: relative; display: block; padding: .8rem; isolation: isolate; }
+.card::before { content: ""; position: absolute; z-index: -1; inset: -3rem; background: url("images/card-1.webp") center / 100% 100% no-repeat; }
+.view:nth-child(2) .card::before { background-image: url("images/card-2.webp"); }
+.view:nth-child(3) .card::before { background-image: url("images/card-3.webp"); }
+.photo { display: block; width: 100%; height: 42.9rem; object-fit: cover; background: #fff; filter: url(#print-img); }
+.photo.ph { background: var(--ph); font-size: 1.6rem; filter: none; }
+.chip { position: absolute; left: 4.5rem; top: 17.6rem; padding: 0 1.3rem; background: var(--red); font-size: 2.6rem; line-height: 4.4rem; white-space: nowrap; }
+.view:not(:first-child) .chip { left: 2.4rem; top: 2.4rem; }
+.big { position: absolute; left: 8rem; top: 22.4rem; color: #fff; font-size: 6.3rem; font-weight: 700; line-height: 1; white-space: nowrap; }
+
+/* ========================= 2. one gallery, seen through the logo as it shrinks ========================= */
+.cad { position: relative; z-index: 1; }
+.pin { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+/* the bare grid and the gallery travel together inside the logo; tracing paper is what's left outside it */
+/* a mask cuts off its own shadow, so the shadow goes on a wrapper, and only once the logo is closing */
+.window-shadow { position: absolute; inset: 0; pointer-events: none; }
+.window-shadow.closing { filter: drop-shadow(0 .6rem 2rem rgba(0, 0, 0, var(--shadow, .32))); }
+.window {
+  pointer-events: auto;
+  position: absolute; inset: 0;
+  background: url("images/grain.webp") 0 0 / 768px, linear-gradient(rgba(60, 60, 60, .24) 1px, transparent 1px) 0 0 / 5.2rem 5.2rem, linear-gradient(90deg, rgba(60, 60, 60, .24) 1px, transparent 1px) 0 0 / 5.2rem 5.2rem, #fff;
+  background-blend-mode: multiply, normal, normal, normal;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+.window.closing { pointer-events: none; }
+.track { padding-top: 9rem; will-change: transform; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; column-gap: 4rem; width: 132rem; margin-left: 29.5rem; }
+.cols > div { display: grid; gap: 4rem; align-content: start; }
+.shanghai {
+  position: absolute; left: 29.5rem; top: 9rem; width: 71rem; transform: rotate(-.4deg); opacity: 0; pointer-events: none; transition: opacity .5s;
+  filter: drop-shadow(0 .8rem 1.6rem rgba(0, 0, 0, .16));
+}
+.shanghai.on { opacity: 1; pointer-events: auto; }
+.shanghai .photo { height: auto; }
+
+/* ========================= 3. arts: back on tracing paper ========================= */
+.arts { position: relative; z-index: 2; margin-top: -75vh; padding-top: 23.4rem; }
+.arts .cols { grid-template-columns: repeat(3, 1fr); }
+.arts .tile .ph { min-height: 27rem; }
+/* the gallery ends on one straight line: pictures go out of focus, more and more, and fade away */
+.arts .cols {
+  position: relative; overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 26rem), rgba(0, 0, 0, .72) calc(100% - 17rem), rgba(0, 0, 0, .28) calc(100% - 8rem), transparent);
+  mask-image: linear-gradient(#000 calc(100% - 26rem), rgba(0, 0, 0, .72) calc(100% - 17rem), rgba(0, 0, 0, .28) calc(100% - 8rem), transparent);
+}
+.lens { position: absolute; left: 0; right: 0; bottom: 0; height: 44rem; pointer-events: none; }
+.lens i { position: absolute; inset: 0; }
+.lens i:nth-child(1) { backdrop-filter: blur(.15rem); -webkit-mask-image: linear-gradient(transparent, #000 20%); mask-image: linear-gradient(transparent, #000 20%); }
+.lens i:nth-child(2) { backdrop-filter: blur(.35rem); -webkit-mask-image: linear-gradient(transparent 15%, #000 35%); mask-image: linear-gradient(transparent 15%, #000 35%); }
+.lens i:nth-child(3) { backdrop-filter: blur(.8rem); -webkit-mask-image: linear-gradient(transparent 30%, #000 52%); mask-image: linear-gradient(transparent 30%, #000 52%); }
+.lens i:nth-child(4) { backdrop-filter: blur(1.6rem); -webkit-mask-image: linear-gradient(transparent 48%, #000 72%); mask-image: linear-gradient(transparent 48%, #000 72%); }
+.lens i:nth-child(5) { backdrop-filter: blur(3.2rem); -webkit-mask-image: linear-gradient(transparent 68%, #000 92%); mask-image: linear-gradient(transparent 68%, #000 92%); }
+
+/* ========================= 4. about, below the last torn edge ========================= */
+.about {
+  position: relative; z-index: 1; display: grid; grid-template-columns: 70.6rem 62rem; column-gap: 5.5rem;
+  margin: 22rem 0 0 29.5rem; padding: 18rem 0 32rem; font-size: max(15px, 2rem); line-height: 1.5; scroll-margin-top: 4rem;
+}
+.about h3 { margin: 7rem 0 1.4rem; font-size: inherit; }
+.about > div > div:first-child h3 { margin-top: 0; }
+.rows { display: grid; column-gap: 3rem; row-gap: .8rem; }
+.rows.edu { grid-template-columns: 36rem auto; }
+.rows.soft { grid-template-columns: 11rem 21rem 10rem auto; }
+.contact { display: flex; gap: 2rem; }
+.contact svg { display: block; width: 3.4rem; height: 3.4rem; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.contact a:hover { color: #c41230; }
+.resume-go { display: inline-block; margin-top: 7rem; font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .caret.show { animation: none; }
+  .overlay, .extra, .media-set, .shanghai, .lead, .words, .words > *, .words::before { transition: none !important; }
+}

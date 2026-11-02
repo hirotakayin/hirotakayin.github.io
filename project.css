@@ -1,0 +1,24 @@
+/* project pages: each block of images sits beside its own text, all visible at once */
+.layout { width: 133rem; margin-left: 29.5rem; padding-bottom: 12rem; }
+.row { display: grid; grid-template-columns: 78rem 50rem; column-gap: 5rem; align-items: start; margin-top: 12rem; }
+/* the first photo and caption line up in the middle of the first screen */
+.row:first-child { align-items: center; min-height: 100vh; margin-top: 0; padding-top: 6rem; }
+.group { display: grid; gap: 3rem; }
+figure img { display: block; width: 100%; height: auto; }
+figure .ph { min-height: 44rem; }
+figcaption { margin-top: 1rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
+.video { position: relative; aspect-ratio: 16 / 9; background: var(--ph); }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.watch { display: inline-block; margin-top: .8rem; font-size: 1.3rem; font-weight: 600; }
+
+.text h1 { font-size: 3.2rem; line-height: 1.1; }
+.text .when { margin: 1rem 0 2.4rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
+.text h2 { margin-bottom: 1.2rem; font-size: 2rem; line-height: 1.2; }
+.text p { margin-bottom: 1.2rem; font-size: var(--t); line-height: 1.38; }
+.text ul { margin: 0 0 1.2rem 2.2rem; font-size: var(--t); line-height: 1.38; }
+.text a { font-weight: 600; }
+.text a:hover, .watch:hover { opacity: .6; }
+.skills-title { margin: 2.4rem 0 1rem; font-size: 1.3rem; font-weight: 600; }
+.skills { display: flex; flex-wrap: wrap; gap: .8rem; }
+.skills span { padding: .4rem 1.1rem; background: rgba(0, 0, 0, .07); font-size: 1.3rem; }
+.back { display: inline-block; margin-top: 2.4rem; font-size: var(--t); }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>victor yin — Apple: iPhone Product Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="../project.css">
+</head>
+<body class="paper">
+  <!-- letterpress look: edges wander a little and the ink drops out in specks -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="print-text" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".1875" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  1.6 0 0 0 -1.075" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+    <filter id="print-img" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".2125" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feColorMatrix in="n" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .8 0 0 0 -.56" result="specks"/>
+      <feComposite in="d" in2="specks" operator="out"/>
+    </filter>
+  </svg>
+
+  <header class="nav">
+    <a class="n-home" href="../index.html">home</a>
+    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
+    <a class="n-projects active" href="../projects.html">projects</a>
+    <a class="n-resume" href="../resume.html">resume</a>
+  </header>
+
+  <main class="layout">
+    <section class="row">
+      <div class="group"><figure><div class="ph">neutral image of your choice</div></figure></div>
+      <div class="text print">
+        <h1>Apple: iPhone Product Design</h1>
+        <p class="when">iPhone Product Design Intern · Shanghai and Shenzhen, China · March – August 2026</p>
+        <p>I spent my internship as an iPhone product design intern working on the iPhone 18 Pro, connecting design and manufacturing with process optimization and enterprise AI.</p>
+        <p class="skills-title">Skills</p>
+        <div class="skills"><span>Failure analysis</span><span>Cpk analysis</span><span>Fault injection</span><span>Design for manufacturing</span><span>Deep learning</span><span>Computer vision</span><span>LLM agents</span><span>Vendor collaboration</span></div>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">process image, if shareable</div></figure></div>
+      <div class="text print">
+        <h2>Process capability</h2>
+        <p>I conducted systems-level failure analysis through fault injection and commonality analysis of Cpk and specification mean shifts.</p><p>Working with upstream vendors and contract manufacturers, I executed targeted material, fixture process and machine mitigation strategies, boosting process capability and units-per-hour while capping part reject rates below 0.02%.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">pipeline diagram, if shareable</div></figure></div>
+      <div class="text print">
+        <h2>Automated defect detection</h2>
+        <p>I engineered an end-to-end pipeline using deep learning to automate defect detection, outperforming human inspection reliability and helping address a primary units-per-hour bottleneck.</p><p>I presented data-driven reports and helped initiate inline factory integration.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">platform diagram, if shareable</div></figure></div>
+      <div class="text print">
+        <h2>Enterprise AI</h2>
+        <p>I assisted development of a multi-agentic platform used by in-region teams, applying LLM agents across manufacturing enterprise databases. It expanded analysis capabilities and cut response latency by up to 50%, for smarter, faster decisions.</p>
+        
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><img class="ink" src="../images/apple-dc.webp" alt=""></figure></div>
+      <div class="text print">
+        <h2>Apple design challenge</h2>
+        <p>I took this mechanism from research and first ideas through rapid prototyping, comparing pivot-hook and sliding-hook concepts over 6+ iterations.</p><p>The final sliding-hook had the lowest part count and a robust locking structure: simple, robust and compact.</p>
+        <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../site.js"></script>
+</body>
+</html>

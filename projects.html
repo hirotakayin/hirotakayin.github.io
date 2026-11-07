@@ -18,6 +18,11 @@
     .small { grid-column: span 3; }
     .grid .ph { aspect-ratio: 16 / 10; min-height: 0; }
     .grid img { aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
+    /* cut-outs (PNGs, and anything mostly see-through) sit straight on the paper instead of on a white card */
+    .grid img[src$=".png"], .grid img.clear { background: none; }
+    /* the hover wash covers only the picture; the title sits centered under it */
+    .grid .tile .over { bottom: auto; aspect-ratio: 16 / 10; }
+    .grid .name { display: block; margin-top: 1.2rem; font-size: var(--t); text-align: center; }
   </style>
 </head>
 <body class="paper">
@@ -49,23 +54,41 @@
 
     <h2 class="sec print">Engineering</h2>
     <div class="grid">
-      <a class="tile mid" href="projects/apple.html"><span class="art"><img class="ink" src="images/apple-dc.webp" alt="" loading="lazy"></span><span class="over print"><strong>Apple Internship</strong></span></a>
-      <a class="tile mid" href="projects/drones.html"><span class="art"><span class="ph">drone image</span></span><span class="over print"><strong>CMU CERLAB</strong></span></a>
-      <a class="tile mid" href="projects/kamome.html"><span class="art"><img class="ink" src="images/sun-lab.webp" alt="" loading="lazy"></span><span class="over print"><strong>UW Sun Lab</strong></span></a>
-      <a class="tile mid" href="projects/manta-ray.html"><span class="art"><span class="ph">manta-ray image</span></span><span class="over print"><strong>Soft Robotics</strong></span></a>
-      <a class="tile mid" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/capstone.webp" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone</strong></span></a>
-      <a class="tile mid" href="projects/phil-up.html"><span class="art"><img class="ink" src="images/phil-up.webp" alt="" loading="lazy"></span><span class="over print"><strong>Phil-Up</strong></span></a>
+      <a class="tile mid" href="projects/apple.html"><span class="art"><img class="ink" src="images/apple-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Apple Internship</strong></span><span class="name print">Apple Internship</span></a>
+      <a class="tile mid" href="projects/drones.html"><span class="art"><img class="ink" src="images/cerlab-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>CMU CERLAB</strong></span><span class="name print">CMU CERLAB</span></a>
+      <a class="tile mid" href="projects/kamome.html"><span class="art"><img class="ink" src="images/sunlab-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>UW Sun Lab</strong></span><span class="name print">UW Sun Lab</span></a>
+      <a class="tile mid" href="projects/manta-ray.html"><span class="art"><img class="ink" src="images/soft-robotics-project-thumbnail-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Soft Robotics</strong></span><span class="name print">Soft Robotics Mantaray Fin</span></a>
+      <a class="tile mid" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/senior-capstone-preview-1-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone</strong></span><span class="name print">Senior Capstone</span></a>
+      <a class="tile mid" href="projects/phil-up.html"><span class="art"><img class="ink" src="images/phil-up-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Phil-Up (Coming Soon)</strong></span><span class="name print">Phil-Up Makerspace Robot</span></a>
     </div>
 
     <h2 class="sec print">Music &amp; Community</h2>
     <div class="grid">
-      <a class="tile mid" href="projects/music.html"><span class="art"><span class="ph">music image</span></span><span class="over print"><strong>Music</strong></span></a>
-      <a class="tile mid" href="projects/graphic-design.html"><span class="art"><span class="ph">graphic design image</span></span><span class="over print"><strong>Graphic Design</strong></span></a>
-      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink" src="images/lego.webp" alt="" loading="lazy"></span><span class="over print"><strong>melty's LEGO</strong></span></a>
+      <a class="tile mid" href="projects/music.html"><span class="art"><img class="ink" src="images/music-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span><span class="name print">Music</span></a>
+      <a class="tile mid" href="projects/graphic-design.html"><span class="art"><img class="ink clear" src="images/graphics-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Graphic Design</strong></span><span class="name print">Graphic Design</span></a>
+      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink clear" src="images/lego-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>melty's LEGO</strong></span><span class="name print">melty's LEGO</span></a>
     </div>
 
   </main>
 
   <script src="site.js"></script>
+  <script>
+    // a picture that is at least 5% see-through counts as a cut-out; soft or rounded edges alone don't
+    // (opened as a file, the browser won't say, so those are also marked by hand with class="clear")
+    document.querySelectorAll('.grid img').forEach((img) => {
+      const check = () => {
+        try {
+          const c = document.createElement('canvas'), g = c.getContext('2d');
+          c.width = 64; c.height = 40;
+          g.drawImage(img, 0, 0, 64, 40);
+          const a = g.getImageData(0, 0, 64, 40).data;
+          let clear = 0;
+          for (let i = 3; i < a.length; i += 4) if (a[i] < 250) clear++;
+          if (clear > .05 * 64 * 40) img.classList.add('clear');
+        } catch (err) {}
+      };
+      if (img.complete && img.naturalWidth) check(); else img.addEventListener('load', check, { once: true });
+    });
+  </script>
 </body>
 </html>

@@ -37,35 +37,20 @@
   <main class="layout">
     <section class="row">
       <div class="group"><figure><img class="ink" src="../images/sun-lab.webp" alt=""></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">Figure: Kamome with an Ocean Optics probe (back left) and MaraCam (front left) in the Opentrons workspace</div></figure><figure><div class="ph">Video: scanning a custom printed 12-well plate</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">Figure: mechanisms within the gantry</div></figure><figure><div class="ph">Figure: electronics case</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">Figure: photoluminescent peak intensity vs chlorine and bromine concentration. Credit: Zuyang Ye</div></figure><figure><div class="ph">Figures: intensity decay rate vs anneal time and measurement location</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">Figure: phase 1 of prototyping, Nov. 2024</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">Mara pipetting GIF</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">MaraCam</div></figure><figure><div class="ph">Scrapped concepts: Thorlabs mount, adjustable arm, overhead wired gantry</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">Mara platform</div></figure></div>
       <div class="text print">
+        <h1>Sun Lab: Kamome, an Open-Source Spectrometer Gantry</h1><p class="tag">A ~$160 gantry that lets a pipetting robot measure its own samples.</p><p class="when">Undergraduate Researcher · University of Washington · Oct 2023 to Aug 2025</p><p class="skills-title">Skills</p><div class="skills"><span>Mechanical design</span><span>CAD</span><span>3D printing</span><span>Arduino</span><span>stepper motion control</span><span>Bayesian optimization</span></div><h2 class="sub">The project</h2><p>Lab automation has great potential to speed up the discovery of new materials. But self-driving labs are held back by the lack of low-cost, high-throughput ways to measure what they make. My research focused on changing that with systems that are cheap and easy to build.</p><p>Kamome is an automated spectrometer gantry for our Opentrons OT-2 robot. When idle, its overhead probe tucks outside the workspace so the robot can pipette directly onto the plate. During a scan, the plate moves gradually as the probe sweeps across, driven by an Arduino and 2 stepper motors. It has already helped us quickly spot patterns in the peak intensities of perovskite films.</p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">image 2</div></figure></div>
+      <div class="text print">
+        <h2>What I did</h2><p>I carried Kamome through a long development process. It went from concept sketches and peer discussions to detailed CAD, then round after round of 3D-printed prototyping and troubleshooting. The finished gantry costs about $160 and increased throughput 4x. Around it, I built a Bayesian optimization workflow linking pipetting, mixing and inspection. I also co-authored research on AI-driven lab automation (<a href="https://doi.org/10.5206/joh.v9i1.23044">DOI: 10.5206/joh.v9i1.23044</a>) and published the design as open-source hardware (<a href="https://github.com/uwsunlab/Kamome">github.com/uwsunlab/Kamome</a>).</p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">image 3</div></figure></div>
+      <div class="text print">
+        <h2>What I learned</h2><p>The initial design phase was particularly difficult. The gantry had to fit a tight space with as few moving parts as possible, and it took many sketches before anything felt right.</p><p>Since this was a self-guided project, nobody handed me a spec. I sharpened my mechanical design skills, but more than that, I learned how to approach an open-ended problem. I reached out to researchers in other fields, listened to what each of them needed, and balanced it all, whether that meant dimensions, workspace or scanning area. Seeing it published for other labs to build made all those iterations worth it.</p><h2>More on Mara</h2><p>Mara combines automated pipetting, measurement and ML-chosen parameters into a closed-loop platform for lead-halide perovskites. It already makes perovskites from precursors that people prepare. A custom 150 °C heater (the stock module reaches 96 °C) and a robotic arm to move plates will take people out of the loop.</p>
         <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
       </div>
     </section>

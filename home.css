@@ -151,4 +151,3 @@ html { scroll-behavior: smooth; }
   .caret.show { animation: none; }
   .overlay, .extra, .media-set, .shanghai, .lead, .words, .words > *, .words::before { transition: none !important; }
 }
-.nav .n-summer { left: 167.5rem; }

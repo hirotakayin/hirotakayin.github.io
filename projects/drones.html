@@ -36,16 +36,21 @@
 
   <main class="layout">
     <section class="row">
-      <div class="group"><figure><div class="ph">simulation GIF</div></figure><figure><div class="ph">real drone GIF or photo</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">planner in simulation</div></figure></div>
-      <div class="text print"></div>
-    </section>
-    <section class="row">
-      <div class="group"><figure><div class="ph">LiDAR attachment and airframe</div></figure></div>
+      <div class="group"><figure><div class="ph">image 1</div></figure></div>
       <div class="text print">
+        <h1>CERLAB: Autonomous Drones for Deep Excavation Pits</h1><p class="tag">Helping drones see and plan their way down 16-meter construction pits.</p><p class="when">Graduate Researcher · Carnegie Mellon University · Aug 2025 to present</p><p class="skills-title">Skills</p><div class="skills"><span>ROS</span><span>Gazebo</span><span>RViz</span><span>LiDAR odometry (FAST-LIO)</span><span>SolidWorks</span><span>FEA</span><span>path planning</span><span>reinforcement learning</span></div><h2 class="sub">The project</h2><p>Deep excavation pits are dangerous places to send people, and drones could take over the job of monitoring soil removal and spotting wall defects. But these pits are tall and crowded with struts and pillars, and they run deeper (16 m) than our LiDAR can see (5 to 7 m). Most exploration planners were built for flat hallways, and a vertical descent breaks a lot of their assumptions.</p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">image 2</div></figure></div>
+      <div class="text print">
+        <h2>What I did</h2><p>My work started with the hardware. I designed a mount that tilts the LiDAR from 7° to 23.5° below the horizon, giving the drone 30% more downward field of view. I also used FEA to optimize the airframe for stress and vibration. Then I moved into software. I built a 12 × 24 × 16 m pit simulation, adapted the Dynamic Exploration Planner (DEP) to explore in 3D, and developed learning-based local planners that cut trajectory generation time by up to 50%. Now I’m proposing a way to test whether learned planners actually understand the structure of a pit, or just memorize their simulator.</p>
+      </div>
+    </section>
+    <section class="row">
+      <div class="group"><figure><div class="ph">image 3</div></figure></div>
+      <div class="text print">
+        <h2>What I learned</h2><p>Tilting the LiDAR felt like a simple mechanical fix: a new bracket and a steeper angle. Then the odometry started seeing the whole world tilted too. Before the drone could fly stably, I had to add a correction step between the odometry and the flight controller. I’ll remember that one. A small hardware change can ripple through the entire software stack.</p><p>The planner taught me something similar. Its frontier slices, roadmap nodes and collision checks all grow with the explored volume, so an approach that worked well in hallways bogged down in a tall pit. Fixing one bottleneck usually reveals the next one. That’s what got me curious about learning-based planners, and it’s the question I’m most excited to dig into next.</p>
         <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
       </div>
     </section>

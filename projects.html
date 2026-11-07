@@ -9,9 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="site.css">
   <style>
-    main { width: 132rem; margin-left: 29.5rem; padding: 14rem 0 12rem; }
+    main { width: 132rem; margin-left: 29.5rem; padding: 9rem 0 12rem; }
     h1 { font-size: 3.2rem; }
     .sec { margin: 6rem 0 2.4rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0, 0, 0, .25); font-size: 1.8rem; }
+    main > .sec:first-child { margin-top: 0; }
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.4rem; align-items: start; }
     .big { grid-column: span 6; }
     .mid { grid-column: span 4; }
@@ -23,6 +24,10 @@
     /* the hover wash covers only the picture; the title sits centered under it */
     .grid .tile .over { bottom: auto; aspect-ratio: 16 / 10; }
     .grid .name { display: block; margin-top: 1.2rem; font-size: var(--t); text-align: center; }
+    /* status labels before a title: gradient lettering */
+    .tag-ongoing, .tag-summer { font-weight: 600; -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .tag-ongoing { background-image: linear-gradient(90deg, #1f4fd1, #3fa7f5); }
+    .tag-summer { background-image: linear-gradient(90deg, #ff7a1a, #a23ee0); }
   </style>
 </head>
 <body class="paper">
@@ -50,23 +55,22 @@
   </header>
 
   <main>
-    <h1 class="print">projects</h1>
 
     <h2 class="sec print">Engineering</h2>
     <div class="grid">
-      <a class="tile mid" href="projects/apple.html"><span class="art"><img class="ink" src="images/apple-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Apple Internship</strong></span><span class="name print">Apple Internship</span></a>
-      <a class="tile mid" href="projects/drones.html"><span class="art"><img class="ink" src="images/cerlab-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>CMU CERLAB</strong></span><span class="name print">CMU CERLAB</span></a>
+      <a class="tile mid" href="projects/apple.html"><span class="art"><img class="ink" src="images/apple-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Apple Internship</strong></span><span class="name print"><span class="tag-summer">This Summer</span> - Apple Internship</span></a>
+      <a class="tile mid" href="projects/drones.html"><span class="art"><img class="ink" src="images/cerlab-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>CMU CERLAB</strong></span><span class="name print"><span class="tag-ongoing">Ongoing</span> - CMU CERLAB</span></a>
+      <a class="tile mid" href="projects/phil-up.html"><span class="art"><img class="ink" src="images/phil-up-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Phil-Up (Coming Soon)</strong></span><span class="name print"><span class="tag-ongoing">Ongoing</span> - Phil-Up Makerspace Robot</span></a>
       <a class="tile mid" href="projects/kamome.html"><span class="art"><img class="ink" src="images/sunlab-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>UW Sun Lab</strong></span><span class="name print">UW Sun Lab</span></a>
-      <a class="tile mid" href="projects/manta-ray.html"><span class="art"><img class="ink" src="images/soft-robotics-project-thumbnail-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Soft Robotics</strong></span><span class="name print">Soft Robotics Mantaray Fin</span></a>
       <a class="tile mid" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/senior-capstone-preview-1-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone</strong></span><span class="name print">Senior Capstone</span></a>
-      <a class="tile mid" href="projects/phil-up.html"><span class="art"><img class="ink" src="images/phil-up-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Phil-Up (Coming Soon)</strong></span><span class="name print">Phil-Up Makerspace Robot</span></a>
+      <a class="tile mid" href="projects/manta-ray.html"><span class="art"><img class="ink" src="images/soft-robotics-project-thumbnail-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Soft Robotics</strong></span><span class="name print">Soft Robotics Mantaray Fin</span></a>
     </div>
 
     <h2 class="sec print">Music &amp; Community</h2>
     <div class="grid">
+      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink clear" src="images/lego-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>melty's LEGO</strong></span><span class="name print">melty's LEGO</span></a>
       <a class="tile mid" href="projects/music.html"><span class="art"><img class="ink" src="images/music-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span><span class="name print">Music</span></a>
       <a class="tile mid" href="projects/graphic-design.html"><span class="art"><img class="ink clear" src="images/graphics-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Graphic Design</strong></span><span class="name print">Graphic Design</span></a>
-      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink clear" src="images/lego-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>melty's LEGO</strong></span><span class="name print">melty's LEGO</span></a>
     </div>
 
   </main>

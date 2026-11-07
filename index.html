@@ -36,7 +36,6 @@
   <header class="nav">
     <a class="n-home active" href="index.html">home</a>
     <img class="nav-sky" src="images/skyline.webp" alt="">
-    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
     <a class="n-projects" href="projects.html">projects</a>
     <a class="n-resume" href="resume.html">resume</a>
   </header>
@@ -70,6 +69,8 @@
   </div>
 
   <section class="story" id="story">
+    <!-- the cards ride in a sticky screen-sized box, so the browser keeps them still while it scrolls; the empty slots below hold their places in the page -->
+    <div class="story-pin" id="story-pin">
     <a class="view" href="#about" data-beat="me" data-text="I&#x27;m a mechE masters student at Carnegie Mellon with a background in mechatronics and machine learning. i.e. I love tinkering with mechanisms and workflows.">
       <span class="card">
       <img class="photo" src="images/me.webp" alt="">
@@ -89,6 +90,8 @@
       <span class="chip print">UW Sun Lab</span>
       </span>
     </a>
+    </div>
+    <div class="slots" id="slots" aria-hidden="true"><i></i><i></i><i></i></div>
   </section>
 
   <section class="cad" id="cad" data-beat="cad" data-text="I equally love just CADing and designing cool assemblies.">

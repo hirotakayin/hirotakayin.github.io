@@ -73,8 +73,13 @@ html { scroll-behavior: smooth; }
 .media-set img { height: 100%; object-fit: cover; }
 
 /* ========================= 1. postcards: each holds still, then the next stacks over it ========================= */
-.story { position: relative; display: grid; gap: 19rem; width: 71rem; margin-left: 29.5rem; padding: 9rem 0 63rem; }
-.view { position: relative; display: block; filter: drop-shadow(0 .8rem 1.6rem rgba(0, 0, 0, .16)); }
+.story { position: relative; width: 71rem; margin-left: 29.5rem; }
+/* pinned by the browser, not by script: scrolling can't move the cards before the script has placed them */
+.story-pin { position: sticky; z-index: 1; top: 0; height: 100vh; margin-bottom: -100vh; pointer-events: none; }
+.slots { display: grid; gap: 19rem; padding: 9rem 0 63rem; }
+.slots > i { display: block; }
+/* moved every frame: its own layer, so the shadow and print filter are drawn once instead of on every scroll */
+.view { position: absolute; left: 0; top: 0; width: 100%; display: block; pointer-events: auto; filter: drop-shadow(0 .8rem 1.6rem rgba(0, 0, 0, .16)); will-change: transform, translate; backface-visibility: hidden; }
 .view:nth-child(1) { transform: rotate(-.5deg); }
 .view:nth-child(2) { transform: rotate(.55deg); }
 .view:nth-child(3) { transform: rotate(-.3deg); }
@@ -108,7 +113,7 @@ html { scroll-behavior: smooth; }
 .cols > div { display: grid; gap: 4rem; align-content: start; }
 .shanghai {
   position: absolute; left: 29.5rem; top: 9rem; width: 71rem; transform: rotate(-.4deg); opacity: 0; pointer-events: none; transition: opacity .5s;
-  filter: drop-shadow(0 .8rem 1.6rem rgba(0, 0, 0, .16));
+  filter: drop-shadow(0 .8rem 1.6rem rgba(0, 0, 0, .16)); will-change: transform, translate;
 }
 .shanghai.on { opacity: 1; pointer-events: auto; }
 .shanghai .photo { height: auto; }
@@ -145,6 +150,48 @@ html { scroll-behavior: smooth; }
 .contact svg { display: block; width: 3.4rem; height: 3.4rem; fill: none; stroke: currentColor; stroke-width: 1.2; }
 .contact a:hover { color: #c41230; }
 .resume-go { display: inline-block; margin-top: 7rem; font-weight: 600; }
+
+/* ========================= phones: one column, captions under their pictures, nothing pinned ========================= */
+@media (max-width: 760px) {
+  body { background: #f6f6f4 url("images/grain.webp") 0 0 / 768px; }
+  .bg, .fuurin, .overlay, .slots, #apple-beat { display: none; }
+  .m-words { margin: 2.4rem 0 0; }
+  .m-words .lead { font-size: max(16px, 1.9rem); }
+  .m-words .m-links { display: flex; flex-wrap: wrap; gap: 2.4rem; margin-top: 1.2rem; font-size: var(--t); font-weight: 600; }
+
+  .story { width: auto; margin: 0; padding: 8.4rem var(--pad) 0; }
+  .story-pin { position: static; height: auto; margin: 0; pointer-events: auto; }
+  .view { position: relative; width: auto; will-change: auto; translate: none !important; }
+  .view + .m-words { margin-bottom: 6.4rem; }
+  .card::before { inset: -1.4rem; }
+  .photo { height: auto; aspect-ratio: 4 / 3; }
+  .chip { left: 1.6rem; top: 1.6rem; font-size: 1.8rem; line-height: 3rem; padding: 0 .9rem; }
+  .view:not(:first-child) .chip { left: 1.6rem; top: 1.6rem; }
+  .big { left: 1.6rem; top: auto; bottom: 1.6rem; font-size: 4.4rem; }
+
+  /* the galleries become plain two-column walls of pictures */
+  .cad { height: auto !important; padding: 0 var(--pad); }
+  .cad > .m-words:first-child { margin: 0 0 2.4rem; }
+  .pin, .window-shadow, .window { position: static; height: auto; overflow: visible; }
+  .window { background: none; -webkit-mask: none !important; mask: none !important; opacity: 1 !important; }
+  .track { padding: 0; transform: none !important; will-change: auto; }
+  .cols, .arts .cols { display: block; width: auto; margin: 0; columns: 2; column-gap: 1.2rem; }
+  .cols > div { display: contents; }
+  .cols .tile { break-inside: avoid; margin-bottom: 1.2rem; translate: none !important; }
+  .shanghai { position: relative; left: auto; top: auto; display: block; width: auto; margin: 2.4rem 0 0; opacity: 1; pointer-events: auto; translate: none !important; will-change: auto; }
+
+  .arts { margin: 6.4rem 0 0; padding: 0 var(--pad); }
+  .arts > .m-words:first-child { margin: 0 0 2.4rem; }
+  .arts .cols { height: auto !important; max-height: 140rem; }
+  .lens { height: 24rem; }
+
+  .about { display: block; margin: 4rem 0 0; padding: 0 var(--pad) 8rem; font-size: var(--t); }
+  .about > .m-words:first-child { margin: 0 0 1.6rem; }
+  .about h3, .about > div > div:first-child h3 { margin: 4rem 0 1rem; }
+  .rows.edu { grid-template-columns: 1fr auto; }
+  .rows.soft { grid-template-columns: 9rem 1fr; }
+  .resume-go { margin-top: 4rem; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

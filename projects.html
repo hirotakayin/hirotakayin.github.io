@@ -28,6 +28,12 @@
     .tag-ongoing, .tag-summer { font-weight: 600; -webkit-background-clip: text; background-clip: text; color: transparent; }
     .tag-ongoing { background-image: linear-gradient(90deg, #1f4fd1, #3fa7f5); }
     .tag-summer { background-image: linear-gradient(90deg, #ff7a1a, #a23ee0); }
+    @media (max-width: 760px) {
+      main { width: auto; margin: 0; padding: 8.4rem var(--pad) 8rem; }
+      h2.sec { font-size: 2rem; }
+      .grid { grid-template-columns: 1fr; row-gap: 3.2rem; }
+      .grid > .tile { grid-column: auto; }
+    }
   </style>
 </head>
 <body class="paper">
@@ -49,7 +55,6 @@
 
   <header class="nav">
     <a class="n-home" href="index.html">home</a>
-    <div class="nav-mid"><a href="mailto:hirotakayin@gmail.com">hirotakayin@gmail.com</a></div>
     <a class="n-projects active" href="projects.html">projects</a>
     <a class="n-resume" href="resume.html">resume</a>
   </header>

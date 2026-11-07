@@ -29,13 +29,13 @@ h1, h2, h3, strong { font-weight: 600; }
   background: rgba(246, 246, 244, .9); backdrop-filter: blur(.8rem); transition: opacity .3s, transform .3s;
 }
 .nav.hide { opacity: 0; transform: translateY(-100%); pointer-events: none; }
-.nav > a, .nav-mid { position: absolute; top: 50%; transform: translateY(-50%); }
+.nav > a { position: absolute; top: 50%; transform: translateY(-50%); }
 .nav a:hover { opacity: .6; }
 .nav a.active { font-weight: 600; }
 .nav .n-home { left: 29.5rem; }
-.nav-mid { left: 96rem; display: flex; gap: 3.2rem; transform: translate(-50%, -50%); white-space: nowrap; }
-.nav .n-projects { left: 146rem; }
+/* projects ends 7 characters before resume starts, whatever the window or text size */
 .nav .n-resume { left: 157rem; }
+.nav .n-projects { right: calc(100% - 157rem + 7ch); }
 
 /* small triangle beside a link */
 .tri { display: inline-block; width: 1.09rem; height: .98rem; margin-left: .3rem; fill: rgba(0, 0, 0, .38); vertical-align: .02em; }
@@ -68,4 +68,21 @@ a:hover > .arrow, a.arrow:hover { color: rgba(0, 0, 0, .8); transform: translate
 
 @media (prefers-reduced-motion: reduce) {
   .nav, .arrow, .tile .art, .tile .over { transition: none; }
+}
+
+/* ========================= phones: 1rem = 10 design px on a 390px frame ========================= */
+.m-only { display: none; }
+@media (max-width: 760px) {
+  html { font-size: min(calc(100vw / 39), 12px); }
+  :root { --t: max(14px, 1.5rem); --pad: 1.8rem; }
+  .m-only { display: revert; }
+  .nav { height: 5.2rem; }
+  .nav .n-home { left: var(--pad); }
+  .nav .n-resume { left: auto; right: var(--pad); }
+  .nav .n-projects { right: calc(var(--pad) + 6ch + 3ch); }
+  .nav-sky { display: none; }
+  /* no hover on a phone: titles stay hidden, and a tap goes straight to the page */
+  .tile:hover .art { filter: none; transform: none; }
+  .tile:hover .over { opacity: 0; }
+  .tri { width: 9px; height: 8px; }
 }

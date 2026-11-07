@@ -53,3 +53,17 @@ figcaption { margin-top: 1rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
 .text p b { font-weight: 600; color: #2f4f8f; }
 figcaption a { color: inherit; text-decoration: underline; }
 figcaption a:hover { opacity: .6; }
+
+/* phones: pictures above their text, one column */
+@media (max-width: 760px) {
+  .layout, .layout.wide { width: auto; margin: 0; padding: 0 var(--pad) 8rem; }
+  .row, .layout.wide .row { grid-template-columns: 1fr; row-gap: 2.4rem; margin-top: 6.4rem; }
+  .row:first-child, .layout.wide .row:first-child { min-height: 0; padding-top: 8.4rem; }
+  .layout.wide .row + .row { margin-top: 6.4rem; }
+  .group { gap: 1.6rem; }
+  figure .ph { min-height: 22rem; }
+  .text h1 { font-size: 2.6rem; }
+  .text h2 { font-size: 2rem; }
+  .g-prev, .g-next { display: none; }
+  .gallery .dots button { width: 7px; height: 7px; }
+}

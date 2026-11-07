@@ -1,5 +1,34 @@
 (function () {
   const $ = (s) => document.querySelector(s);
+
+  /* ======================================================================
+     phones: no pinning or scroll effects; each caption sits under what it's about
+     ====================================================================== */
+  const phone = window.matchMedia('(max-width: 760px)');
+  // the two layouts are built differently, so crossing the line starts the page over
+  phone.addEventListener('change', () => location.reload());
+  if (phone.matches) {
+    const tri = '<svg class="tri right" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>';
+    const words = (html, links) => {
+      const box = document.createElement('div');
+      box.className = 'm-words print';
+      box.innerHTML = '<p class="lead">' + html + '</p>' +
+        (links.length ? '<p class="m-links">' + links.map(([text, href]) => '<a href="' + href + '">' + text + ' ' + tri + '</a>').join('') + '</p>' : '');
+      return box;
+    };
+    document.querySelectorAll('.view').forEach((v, i) => v.after(words(v.dataset.text,
+      i === 0 ? [['resume', 'resume.html'], ['this summer', 'projects/apple.html']] : [['read more', v.getAttribute('href')]])));
+    const cad = $('#cad'), apple = $('#apple-beat'), arts = $('#arts'), about = $('#about');
+    cad.prepend(words(cad.dataset.text, [['see more', 'projects.html']]));
+    const summer = words(apple.dataset.text, [['what i did this summer', 'projects/apple.html']]);
+    cad.append(summer);
+    summer.after($('#shanghai'));
+    arts.prepend(words(arts.dataset.text, []));
+    about.prepend(words(about.dataset.text, []));
+    // copies made for the desktop gallery are dropped, so each picture shows once
+    document.querySelectorAll('#track [aria-hidden="true"]').forEach((t) => t.remove());
+    return;
+  }
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smooth = (v) => { v = clamp(v); return v * v * (3 - 2 * v); };
@@ -69,6 +98,8 @@
   const cad = $('#cad'), arts = $('#arts'), about = $('#about');
   const appleBeat = $('#apple-beat'), more = $('#more'), shanghai = $('#shanghai');
   let beat = null, closing = 0;
+  // read once per layout: reading it every frame forces a style recalc mid-frame
+  let REM = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
   function currentBeat() {
     const V = window.innerHeight;
@@ -77,7 +108,7 @@
     if (closing > .45) return appleBeat;
     if (cad.getBoundingClientRect().top < V * .2) return cad;
     // a caption changes once its picture has covered half of the one before it
-    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const rem = REM;
     let at = story[0];
     story.forEach((v) => { if (v.getBoundingClientRect().top < 9 * rem + v.offsetHeight / 2) at = v; });
     return at;
@@ -143,11 +174,15 @@
     overlay.style.setProperty('--lead-h', tallest + 'px');
   }
   function layout() {
-    const V = window.innerHeight, rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    REM = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const V = window.innerHeight, rem = REM;
     const close = CLOSE_VH * V;
     // the cards move slower than the page, so the page below has to wait for them
-    const lastCard = story[story.length - 1];
-    $('#story').style.paddingBottom = (releaseAt(rem) + LEAVE_REM * rem - lastCard.offsetTop - lastCard.offsetHeight) + 'px';
+    // each card's empty slot keeps the place in the page it would have had
+    story.forEach((v, i) => { slots[i].style.height = v.offsetHeight + 'px'; });
+    slotTops = slots.map((s) => s.offsetTop);
+    const last = story.length - 1;
+    $('#slots').style.paddingBottom = (releaseAt(rem) + LEAVE_REM * rem - slotTops[last] - story[last].offsetHeight) + 'px';
     travel = Math.max(track.offsetHeight - V, 0);
     // it starts at the same row of the gallery, whatever shape the window is
     const row = track.querySelector('.cols > div > a:nth-of-type(' + LOGO_ROW + ')');
@@ -212,15 +247,19 @@
      ====================================================================== */
   const EASE_REM = 12, DRIFT_REM = 2.5, HOLD_REM = 26, CARD_SPEED = .5, LEAVE_REM = 68;
   // the scroll where the finished stack starts leaving with the page
-  const releaseAt = (rem) => (story[story.length - 1].offsetTop - 9 * rem + HOLD_REM * rem) / CARD_SPEED;
+  const slots = [...document.querySelectorAll('#slots > i')], storyPin = $('#story-pin');
+  let slotTops = [];
+  const releaseAt = (rem) => (slotTops[slotTops.length - 1] - 9 * rem + HOLD_REM * rem) / CARD_SPEED;
   function updateCards() {
-    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const rem = REM;
     const pin = 9 * rem, drift = DRIFT_REM * rem, nudge = rem, A = EASE_REM * rem, y = window.scrollY;
     const release = releaseAt(rem);
+    // while pinned this is 0 and the cards only move when the script moves them
+    const pinTop = storyPin.getBoundingClientRect().top;
     story.forEach((card, i) => {
-      const flow = card.offsetTop - y, d = card.offsetTop - pin - y * CARD_SPEED;
+      const d = slotTops[i] - pin - y * CARD_SPEED;
       // the gap between cards is wider than this, so a card lands before the next one reaches it
-      const hold = i === 0 ? story[1].offsetTop - card.offsetTop : HOLD_REM * rem;
+      const hold = i === 0 ? slotTops[1] - slotTops[0] : HOLD_REM * rem;
       let at;
       if (i === 0) {
         at = pin + (drift / hold) * Math.max(d, -hold);
@@ -234,7 +273,7 @@
         else at = pin - land + c * Math.max(e, K - b);
       }
       at -= Math.max(y - release, 0);
-      card.style.translate = '0 ' + (at - flow).toFixed(1) + 'px';
+      card.style.translate = '0 ' + (at - pinTop).toFixed(1) + 'px';
     });
   }
 
@@ -359,7 +398,9 @@
     });
   }
 
+  let drawnAt = null;
   function frame() {
+    drawnAt = window.scrollY;
     updateCards();
     updateGallery();
     updateMoving();
@@ -368,7 +409,7 @@
     const V = window.innerHeight;
     overlay.classList.toggle('over', beat === arts || (beat === appleBeat && closing < .7) || beat === cad || (beat === about && arts.getBoundingClientRect().bottom > words.getBoundingClientRect().top));
     // the side images leave before the torn edge reaches them
-    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const rem = REM;
     // the photo stays until the next section nears it, then leaves upward just ahead of it
     const lift = Math.min(arts.getBoundingClientRect().top - (shanghai.offsetTop + shanghai.offsetHeight - 8 * rem), 0);
     shanghai.style.translate = '0 ' + (lift - shanghai.parentNode.getBoundingClientRect().top).toFixed(1) + 'px';
@@ -377,7 +418,8 @@
     const at = story.indexOf(beat);
     sets.forEach((s, i) => s.classList.toggle('on', i === at && clear));
   }
-  const onScroll = () => frame();
+  // the wheel glide already drew this position; drawing it again would double the work every frame
+  const onScroll = () => { if (window.scrollY !== drawnAt) frame(); };
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('beats-changed', () => { if (beat) applyBeat(beat); });
   // released first: copies of a held picture would come out blank

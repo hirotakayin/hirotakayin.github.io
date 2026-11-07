@@ -35,6 +35,8 @@ html { scroll-behavior: smooth; }
   -webkit-mask-composite: source-in; mask-composite: intersect;
 }
 .overlay.over .words::before { opacity: 1; }
+/* the music caption sits over busy photos, so its blur gets a soft white wash too */
+.overlay[data-beat="arts"] .words::before { background: rgba(255, 255, 255, .45); }
 /* the words and the blur fade separately: fading their parent would turn the blur off until it finished */
 .overlay .words.card-out > *, .overlay .words.card-out::before { opacity: 0; transition: opacity .22s cubic-bezier(.42, 0, 1, 1); }
 .overlay .words.card-from > *, .overlay .words.card-from::before { opacity: 0; transition: none; }

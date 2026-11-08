@@ -75,4 +75,6 @@ figcaption a:hover { opacity: .6; }
   .text h2 { font-size: 2rem; }
   .g-prev, .g-next { display: none; }
   .gallery .dots button { width: 7px; height: 7px; }
+  /* drop the desktop nudges made in the editor so everything stacks in one column */
+  .layout [style*="translate"] { translate: none !important; }
 }

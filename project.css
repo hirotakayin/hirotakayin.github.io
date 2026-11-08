@@ -78,3 +78,11 @@ figcaption a:hover { opacity: .6; }
   /* drop the desktop nudges made in the editor so everything stacks in one column */
   .layout [style*="translate"] { translate: none !important; }
 }
+/* Sun Lab instructions booklet: a titled gallery at 2/3 the column width */
+.booklet { width: calc(100% / 1.5); margin: 1rem auto 0; }
+.booklet-title { margin-bottom: 1rem; font-size: var(--t); font-weight: 600; }
+@media (max-width: 760px) { .booklet { width: 100%; } }
+/* LEGO renders are cut out (transparent), so let them sit on the page */
+.gallery.clear .slide { aspect-ratio: 4 / 3; background: none; }
+/* "more coming soon" slot (Phil-Up): a quiet dashed box, shorter than a full placeholder */
+figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); background: none; font-size: var(--t); font-style: italic; color: rgba(0, 0, 0, .5); }

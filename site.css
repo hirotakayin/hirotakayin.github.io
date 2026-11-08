@@ -19,7 +19,11 @@ a { color: inherit; text-decoration: none; }
 h1, h2, h3, strong { font-weight: 600; }
 
 /* printed look */
-.print { filter: url(#print-text); }
+/* letterpress grain only on bold type; regular text stays crisp for reading */
+.print:is(h1, h2, h3, strong, b, .big, .resume-go),
+.print :is(h1, h2, h3, strong, b, a, .skills-title, .ai, .tag-ongoing, .tag-summer) { filter: url(#print-text); }
+.print :is(h1, h2, h3, strong, b, a) :is(strong, b, a) { filter: none; }
+figcaption.print a { filter: none !important; }
 .ink { filter: url(#print-img); }
 .drawing { pointer-events: none; }
 

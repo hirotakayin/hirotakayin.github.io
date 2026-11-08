@@ -47,12 +47,21 @@ figcaption { margin-top: 1rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
 .text .skills + .intro { margin-top: 2.4rem; }
 /* wider reading column (Apple page): text 30% wider, pictures narrower */
 .layout.wide .row { grid-template-columns: 63rem 65rem; }
-.layout.wide .row:first-child { min-height: 0; padding-top: 12rem; }
-.layout.wide .row + .row { margin-top: 6rem; }
+.layout.wide .row:first-child, .layout.tight .row:first-child { min-height: 0; padding-top: 12rem; }
+.layout.tight .row, .layout.wide .row { align-items: start; }
+.layout.tight .text > :first-child, .layout.wide .text > :first-child { margin-top: 0; }
+.layout.wide .row + .row, .layout.tight .row + .row { margin-top: 6rem; }
 /* key points: ink-blue accent instead of heavy bold */
 .text p b { font-weight: 600; color: #2f4f8f; }
 figcaption a { color: inherit; text-decoration: underline; }
 figcaption a:hover { opacity: .6; }
+.text .refs { margin-top: .6rem; font-size: 1.3rem; }
+/* simple pill flow diagram (Sun Lab workflow) */
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 1.6rem 0 1.2rem; font-size: 1.3rem; }
+.flow .pill { padding: .5rem 1.1rem; border: 1px solid rgba(0, 0, 0, .25); border-radius: 99rem; background: #fff; white-space: nowrap; }
+.flow .flow-arrow { color: rgba(0, 0, 0, .45); }
+.flow .flow-loop { flex-basis: 100%; margin-top: .2rem; font-size: 1.3rem; color: #2f4f8f; }
+.gallery.tall .slide { aspect-ratio: 1224 / 1584; }
 
 /* phones: pictures above their text, one column */
 @media (max-width: 760px) {

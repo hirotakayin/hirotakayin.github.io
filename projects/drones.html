@@ -33,23 +33,23 @@
     <a class="n-resume" href="../resume.html">resume</a>
   </header>
 
-  <main class="layout">
+  <main class="layout wide">
     <section class="row">
-      <div class="group"><figure><div class="ph">image 1</div></figure></div>
+      <div class="group"><figure><img class="ink" src="../images/cerlab-project-thumbnail.webp" alt="" loading="lazy"></figure></div>
       <div class="text print">
-        <h1>CERLAB: Autonomous Drones for Deep Excavation Pits</h1><p class="tag">Helping drones see and plan their way down 16-meter construction pits.</p><p class="when">Graduate Researcher · Carnegie Mellon University · Aug 2025 to present</p><p class="skills-title">Skills</p><div class="skills"><span>ROS</span><span>Gazebo</span><span>RViz</span><span>LiDAR odometry (FAST-LIO)</span><span>SolidWorks</span><span>FEA</span><span>path planning</span><span>reinforcement learning</span></div><h2 class="sub">The project</h2><p>Deep excavation pits are dangerous places to send people, and drones could take over the job of monitoring soil removal and spotting wall defects. But these pits are tall and crowded with struts and pillars, and they run deeper (16 m) than our LiDAR can see (5 to 7 m). Most exploration planners were built for flat hallways, and a vertical descent breaks a lot of their assumptions.</p>
+        <h1>Autonomous Exploration Drones</h1><p class="when">Graduate Researcher · Carnegie Mellon University · Aug 2025 ~ present</p><p class="skills-title">Skills</p><div class="skills"><span>ROS</span><span>Gazebo</span><span>RViz</span><span>LiDAR odometry</span><span>Path planning</span><span>Reinforcement learning</span></div><h2 class="sub">Motivation</h2><p>Drones are perfect for large 3D environments like excavation pits, where they can monitor soil removal and spot wall defects. However, most existing exploration planners are built for flat hallways and indoor spaces, not GPS-denied, tall and crowded pits with struts and pillars. My research focuses on classical and learning-based planners to address this gap.&nbsp;</p>
       </div>
     </section>
     <section class="row">
-      <div class="group"><figure><div class="ph">image 2</div></figure></div>
-      <div class="text print">
-        <h2>What I did</h2><p>My work started with the hardware. I designed a mount that tilts the LiDAR from 7° to 23.5° below the horizon, giving the drone 30% more downward field of view. I also used FEA to optimize the airframe for stress and vibration. Then I moved into software. I built a 12 × 24 × 16 m pit simulation, adapted the Dynamic Exploration Planner (DEP) to explore in 3D, and developed learning-based local planners that cut trajectory generation time by up to 50%. Now I’m proposing a way to test whether learned planners actually understand the structure of a pit, or just memorize their simulator.</p>
+      <div class="group"></div>
+      <div style="translate: -0.1rem -7.4rem" class="text print">
+        <h2 class="sub">What I'm working on</h2><h3>1) Upgraded a classical exploration planner for highly vertical environments.</h3><p>Classical planners sample candidate paths and score them based on predicted information gain. When the exploration volume expands in 3D, the nodes, candidate paths all multiply -- slowing down computation.&nbsp;<br><br>With little prior knowledge about UAV sims, I thoroughly went through our current codebase and relevant literature, which helped me pinpoint areas of improvement in computation and gain scoring. I then ran numerous tests in a pit simulation and adapted our current Dynamic Exploration Planner (DEP) (<a href="https://github.com/Zhefan-Xu/CERLAB-UAV-Autonomy">GitHub</a>), allowing the drone to successfully explore a new family of 3D pit environments.&nbsp;</p>
       </div>
     </section>
     <section class="row">
-      <div class="group"><figure><div class="ph">image 3</div></figure></div>
-      <div class="text print">
-        <h2>What I learned</h2><p>Tilting the LiDAR felt like a simple mechanical fix: a new bracket and a steeper angle. Then the odometry started seeing the whole world tilted too. Before the drone could fly stably, I had to add a correction step between the odometry and the flight controller. I’ll remember that one. A small hardware change can ripple through the entire software stack.</p><p>The planner taught me something similar. Its frontier slices, roadmap nodes and collision checks all grow with the explored volume, so an approach that worked well in hallways bogged down in a tall pit. Fixing one bottleneck usually reveals the next one. That’s what got me curious about learning-based planners, and it’s the question I’m most excited to dig into next.</p>
+      <div class="group"></div>
+      <div style="translate: 0rem -11.1rem" class="text print">
+        <h3>2) Learning-based planners (ongoing)</h3><p>While classical planners work sufficiently, learning-based planners can be much more efficient, as they find their ‘own’ score functions based on spatial context. With some modifications to existing approaches (ARiADNE), we immediately saw improvements in exploration time and path length, though transferability between irregular pit environments was limited. I aim to create new approaches for a more generalizable policy across non-uniform pit geometries. Stay tuned!</p>
         <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
       </div>
     </section>

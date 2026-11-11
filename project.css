@@ -129,3 +129,5 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 }
 /* a caption that sits beside its picture in the two-across grid (TreeTop Sweets) */
 .layout.stack .pics .pic-note h3 { margin-top: 0; }
+/* a page that opens with its title alone (manta ray): the title block takes the whole width */
+.layout .row.solo { grid-template-columns: minmax(0, 1fr); }

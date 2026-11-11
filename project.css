@@ -114,3 +114,4 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 /* YouTube channel screenshots (LEGO): wide slides on white, shown whole */
 .gallery.yt .slide { aspect-ratio: 2 / 1; padding: 1.2rem; }
 .gallery.yt figcaption { text-align: center; }
+.text h1 .views { margin-left: .4em; font-size: var(--small); font-weight: 400; color: rgba(0, 0, 0, .6); white-space: nowrap; vertical-align: .35em; }

@@ -6,21 +6,21 @@
 .group { display: grid; gap: 3rem; }
 figure img { display: block; width: 100%; height: auto; }
 figure .ph { min-height: 44rem; }
-figcaption { margin-top: 1rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
+figcaption { margin-top: 1rem; font-size: var(--small); color: rgba(0, 0, 0, .6); }
 .video { position: relative; aspect-ratio: 16 / 9; background: var(--ph); }
 .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.watch { display: inline-block; margin-top: .8rem; font-size: 1.3rem; font-weight: 600; }
+.watch { display: inline-block; margin-top: .8rem; font-size: var(--small); font-weight: 600; }
 
-.text h1 { font-size: 3.2rem; line-height: 1.1; }
-.text .when { margin: 1rem 0 2.4rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
-.text h2 { margin-bottom: 1.2rem; font-size: 2rem; line-height: 1.2; }
+.text h1 { font-size: calc(var(--t) * 2); line-height: 1.1; }
+.text .when { margin: .6em 0 1.5em; font-size: var(--small); color: rgba(0, 0, 0, .6); }
+.text h2 { margin-bottom: .6em; font-size: calc(var(--t) * 1.25); line-height: 1.2; }
 .text p { margin-bottom: 1.2rem; font-size: var(--t); line-height: 1.38; }
 .text ul { margin: 0 0 1.2rem 2.2rem; font-size: var(--t); line-height: 1.38; }
 .text a { font-weight: 600; }
 .text a:hover, .watch:hover { opacity: .6; }
-.skills-title { margin: 2.4rem 0 1rem; font-size: 1.3rem; font-weight: 600; }
-.skills { display: flex; flex-wrap: wrap; gap: .8rem; }
-.skills span { padding: .4rem 1.1rem; background: rgba(0, 0, 0, .07); font-size: 1.3rem; }
+.skills-title { margin: 1.8em 0 .8em; font-size: var(--small); font-weight: 600; }
+.skills { display: flex; flex-wrap: wrap; gap: .6em; font-size: var(--small); }
+.skills span { padding: .3em .85em; background: rgba(0, 0, 0, .07); }
 .back { display: inline-block; margin-top: 2.4rem; font-size: var(--t); }
 .text .tag { margin-top: 1rem; font-size: var(--t); font-style: italic; line-height: 1.38; }
 .text .tag + .when { margin-top: .4rem; }
@@ -55,13 +55,17 @@ figcaption { margin-top: 1rem; font-size: 1.3rem; color: rgba(0, 0, 0, .6); }
 .text p b { font-weight: 600; color: #2f4f8f; }
 figcaption a { color: inherit; text-decoration: underline; }
 figcaption a:hover { opacity: .6; }
-.text .refs { margin-top: .6rem; font-size: 1.3rem; }
+.text .refs { margin-top: .6rem; font-size: var(--small); }
 /* simple pill flow diagram (Sun Lab workflow) */
-.flow { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 1.6rem 0 1.2rem; font-size: 1.3rem; }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 1.6rem 0 1.2rem; font-size: var(--small); }
 .flow .pill { padding: .5rem 1.1rem; border: 1px solid rgba(0, 0, 0, .25); border-radius: 99rem; background: #fff; white-space: nowrap; }
 .flow .flow-arrow { color: rgba(0, 0, 0, .45); }
-.flow .flow-loop { flex-basis: 100%; margin-top: .2rem; font-size: 1.3rem; color: #2f4f8f; }
+.flow .flow-loop { flex-basis: 100%; margin-top: .2rem; font-size: var(--small); color: #2f4f8f; }
 .gallery.tall .slide { aspect-ratio: 1224 / 1584; }
+
+/* pages with no pictures: the text takes the whole width */
+.layout.textonly .row { grid-template-columns: minmax(0, 1fr); }
+.layout.textonly .text p, .layout.textonly .text ul { max-width: 100%; }
 
 /* phones: pictures above their text, one column */
 @media (max-width: 760px) {
@@ -71,8 +75,6 @@ figcaption a:hover { opacity: .6; }
   .layout.wide .row + .row { margin-top: 6.4rem; }
   .group { gap: 1.6rem; }
   figure .ph { min-height: 22rem; }
-  .text h1 { font-size: 2.6rem; }
-  .text h2 { font-size: 2rem; }
   .g-prev, .g-next { display: none; }
   .gallery .dots button { width: 7px; height: 7px; }
   /* drop the desktop nudges made in the editor so everything stacks in one column */

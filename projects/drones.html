@@ -38,17 +38,7 @@
       <div class="group"><figure><img class="ink" src="../images/cerlab-project-thumbnail.webp" alt="" loading="lazy"></figure></div>
       <div class="text print">
         <h1>Autonomous Exploration Drones</h1><p class="when">Graduate Researcher · Carnegie Mellon University · Aug 2025 ~ present</p><p class="skills-title">Skills</p><div class="skills"><span>ROS</span><span>Gazebo</span><span>RViz</span><span>LiDAR odometry</span><span>Path planning</span><span>Reinforcement learning</span></div><h2 class="sub">Motivation</h2><p>Drones are perfect for large 3D environments like excavation pits, where they can monitor soil removal and spot wall defects. However, most existing exploration planners are built for flat hallways and indoor spaces, not GPS-denied, tall and crowded pits with struts and pillars. My research focuses on classical and learning-based planners to address this gap.&nbsp;</p>
-      </div>
-    </section>
-    <section class="row">
-      <div class="group"></div>
-      <div style="translate: -0.1rem -7.4rem" class="text print">
         <h2 class="sub">What I'm working on</h2><h3>1) Upgraded a classical exploration planner for highly vertical environments.</h3><p>Classical planners sample candidate paths and score them based on predicted information gain. When the exploration volume expands in 3D, the nodes, candidate paths all multiply -- slowing down computation.&nbsp;<br><br>With little prior knowledge about UAV sims, I thoroughly went through our current codebase and relevant literature, which helped me pinpoint areas of improvement in computation and gain scoring. I then ran numerous tests in a pit simulation and adapted our current Dynamic Exploration Planner (DEP) (<a href="https://github.com/Zhefan-Xu/CERLAB-UAV-Autonomy">GitHub</a>), allowing the drone to successfully explore a new family of 3D pit environments.&nbsp;</p>
-      </div>
-    </section>
-    <section class="row">
-      <div class="group"></div>
-      <div style="translate: 0rem -11.1rem" class="text print">
         <h3>2) Learning-based planners (ongoing)</h3><p>While classical planners work sufficiently, learning-based planners can be much more efficient, as they find their ‘own’ score functions based on spatial context. With some modifications to existing approaches (ARiADNE), we immediately saw improvements in exploration time and path length, though transferability between irregular pit environments was limited. I aim to create new approaches for a more generalizable policy across non-uniform pit geometries. Stay tuned!</p>
         <a class="back" href="../projects.html"><svg class="tri left" viewBox="0 0 10 9" aria-hidden="true"><path d="M0 9 L5 0 L10 9 Z"/></svg>all projects</a>
       </div>

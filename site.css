@@ -7,6 +7,7 @@ html { font-size: calc(100vw / 192); }
   --red: rgba(196, 18, 48, .9);
   --ph: #d6d6d6;
   --t: max(13px, 1.6rem);
+  --small: calc(var(--t) * .8125); /* captions, dates, skills: always the same step below body text */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -42,9 +43,9 @@ figcaption.print a { filter: none !important; }
 .nav .n-projects { right: calc(100% - 157rem + 7ch); }
 
 /* small triangle beside a link */
-.tri { display: inline-block; width: 1.09rem; height: .98rem; margin-left: .3rem; fill: rgba(0, 0, 0, .38); vertical-align: .02em; }
+.tri { display: inline-block; width: .68em; height: .61em; margin-left: .19em; fill: rgba(0, 0, 0, .38); vertical-align: .02em; }
 .tri.right { transform: rotate(90deg); }
-.tri.left { margin: 0 .3rem 0 0; transform: rotate(-90deg); }
+.tri.left { margin: 0 .19em 0 0; transform: rotate(-90deg); }
 
 /* abstract arrow */
 .arrow { display: inline-block; flex: none; width: 6.4rem; height: 4.6rem; color: rgba(0, 0, 0, .42); transition: color .2s, transform .2s; }
@@ -88,5 +89,4 @@ a:hover > .arrow, a.arrow:hover { color: rgba(0, 0, 0, .8); transform: translate
   /* no hover on a phone: titles stay hidden, and a tap goes straight to the page */
   .tile:hover .art { filter: none; transform: none; }
   .tile:hover .over { opacity: 0; }
-  .tri { width: 9px; height: 8px; }
 }

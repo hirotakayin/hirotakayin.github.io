@@ -4,7 +4,7 @@
   python3 tools/sitetext.py extract            -> JSON of every editable block, one entry per page
   python3 tools/sitetext.py apply pages.json   -> writes edited blocks (html != orig) back into the HTML
 
-A block is a <p> or <h3> on a page (by position), or a data-text caption on the home page.
+A block is a <p>, <h2> or <h3> on a page (by position), or a data-text caption on the home page.
 Each block carries `orig`, the text as it was when last synced, so apply can find it again
 even if paragraphs were added or moved in the file since.
 """
@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TAG = re.compile(r'<(p|h3)((?:\s[^>]*)?)>(.*?)</\1>', re.S)
+TAG = re.compile(r'<(p|h2|h3)((?:\s[^>]*)?)>(.*?)</\1>', re.S)
 DATA = re.compile(r'data-beat="([^"]+)"([^>]*?)data-text="([^"]*)"', re.S)
 SKIP_CLASSES = {'skills-title', 'refs', 'm-only', 'resume-open'}
 LABELS = {'when': 'Date line', 'tag': 'Tagline', 'intro': 'Intro', 'lead': 'Intro'}
@@ -54,7 +54,7 @@ def extract():
             cls = classes(attrs)
             if cls & SKIP_CLASSES or not inner.strip():
                 continue
-            label = 'Heading' if tag == 'h3' else next((LABELS[c] for c in cls if c in LABELS), 'Paragraph')
+            label = 'Section title' if tag == 'h2' else 'Heading' if tag == 'h3' else next((LABELS[c] for c in cls if c in LABELS), 'Paragraph')
             blocks.append({'id': f'{tag}:{i}', 'label': label, 'orig': inner, 'html': inner})
         if blocks:
             slug = Path(file).stem if file != 'index.html' else 'home'

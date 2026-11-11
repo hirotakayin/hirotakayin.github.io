@@ -115,3 +115,15 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .gallery.yt .slide { aspect-ratio: 2 / 1; padding: 1.2rem; }
 .gallery.yt figcaption { text-align: center; }
 .text h1 .views { margin-left: .4em; font-size: var(--small); font-weight: 400; color: rgba(0, 0, 0, .6); white-space: nowrap; vertical-align: .35em; }
+/* project pages in reading order: one picture beside the title block, then the story at full width, then the pictures two across */
+.layout.stack .full { margin-top: 6rem; }
+.layout.stack .full > :first-child { margin-top: 0; }
+.layout.stack .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem 3rem; align-items: start; margin-top: 8rem; }
+.layout.stack .pics > * { min-width: 0; }
+.layout.stack .pics .booklet { width: 100%; margin: 0; }
+.layout.stack .end { margin-top: 2rem; }
+.layout.stack .paper { margin-top: 2.4rem; }
+@media (max-width: 760px) {
+  .layout.stack .full { margin-top: 4rem; }
+  .layout.stack .pics { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; margin-top: 4.8rem; }
+}

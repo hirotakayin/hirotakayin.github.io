@@ -143,9 +143,12 @@ html { scroll-behavior: smooth; }
 }
 .about h3 { margin: 7rem 0 1.4rem; font-size: inherit; }
 .about > div > div:first-child h3 { margin-top: 0; }
-.rows { display: grid; column-gap: 3rem; row-gap: .8rem; }
-.rows.edu { grid-template-columns: 36rem auto; }
-.rows.soft { grid-template-columns: 11rem 21rem 10rem auto; }
+.rows { display: grid; column-gap: max(3rem, 1em); row-gap: .8rem; }
+.rows.edu { grid-template-columns: minmax(max-content, 36rem) auto; }
+/* the label columns never shrink below their words, and the lists wrap instead of running into the next column */
+.rows.soft { grid-template-columns: minmax(max-content, 11rem) minmax(0, 21rem) minmax(max-content, 10rem) minmax(0, 1fr); }
+/* narrower windows: one label and its list per line */
+@media (max-width: 1600px) { .rows.soft { grid-template-columns: max-content minmax(0, 1fr); } }
 .contact { display: flex; gap: 2rem; }
 .contact svg { display: block; width: 3.4rem; height: 3.4rem; fill: none; stroke: currentColor; stroke-width: 1.2; }
 .contact a:hover { color: #c41230; }

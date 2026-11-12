@@ -64,7 +64,8 @@ html { scroll-behavior: smooth; }
 .overlay[data-beat="cerlab"] .more, .overlay[data-beat="sun"] .more,
 .overlay[data-beat="cad"] .see, .overlay[data-beat="apple"] .summer { opacity: 1; pointer-events: auto; transition: opacity .3s; }
 .summer { top: 4.8rem; }
-.lg { flex: none; width: 2.8rem; height: 2.8rem; margin-right: .5rem; background: var(--ink); opacity: 0; -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; }
+/* invisible spot the closing circle shrinks into, just before the link text */
+.lg { flex: none; width: 2.8rem; height: 2.8rem; margin-right: .5rem; opacity: 0; }
 
 .media { position: relative; aspect-ratio: 16 / 9; margin-top: 2.4rem; }
 .media-set { position: absolute; inset: 0; display: grid; opacity: 0; pointer-events: none; transition: opacity .4s; }
@@ -94,11 +95,11 @@ html { scroll-behavior: smooth; }
 .view:not(:first-child) .chip { left: 2.4rem; top: 2.4rem; }
 .big { position: absolute; left: 8rem; top: 22.4rem; color: #fff; font-size: 6.3rem; font-weight: 700; line-height: 1; white-space: nowrap; }
 
-/* ========================= 2. one gallery, seen through the logo as it shrinks ========================= */
+/* ========================= 2. one gallery, seen through a circle as it shrinks ========================= */
 .cad { position: relative; z-index: 1; }
 .pin { position: sticky; top: 0; height: 100vh; overflow: hidden; }
-/* the bare grid and the gallery travel together inside the logo; tracing paper is what's left outside it */
-/* a mask cuts off its own shadow, so the shadow goes on a wrapper, and only once the logo is closing */
+/* the bare grid and the gallery travel together inside the circle; tracing paper is what's left outside it */
+/* a mask cuts off its own shadow, so the shadow goes on a wrapper, and only once the circle is closing */
 .window-shadow { position: absolute; inset: 0; pointer-events: none; }
 .window-shadow.closing { filter: drop-shadow(0 .6rem 2rem rgba(0, 0, 0, var(--shadow, .32))); }
 .window {

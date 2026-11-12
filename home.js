@@ -20,7 +20,7 @@
       i === 0 ? [['resume', 'resume.html'], ['this summer', 'projects/apple.html']] : [['read more', v.getAttribute('href')]])));
     const cad = $('#cad'), apple = $('#apple-beat'), arts = $('#arts'), about = $('#about');
     cad.prepend(words(cad.dataset.text, [['see more', 'projects.html']]));
-    const summer = words(apple.dataset.text, [['what i did this summer', 'projects/apple.html']]);
+    const summer = words(apple.dataset.text, [['this summer at Apple', 'projects/apple.html']]);
     cad.append(summer);
     summer.after($('#shanghai'));
     arts.prepend(words(arts.dataset.text, []));
@@ -223,9 +223,8 @@
     closing = e;
     win.classList.toggle('closing', e > .02);
     win.parentNode.classList.toggle('closing', e > 0);
-    // gone before the logo is small enough for its shadow to look like a smudge
+    // gone before the circle is small enough for its shadow to look like a smudge
     win.parentNode.style.setProperty('--shadow', (.32 * (1 - smooth((e - .72) / .14))).toFixed(3));
-    logoEnd.style.opacity = smooth((e - .88) / .1);
     win.style.opacity = 1 - smooth((e - .93) / .07);
     if (e <= 0) {
       if (maskOn) { win.style.webkitMaskImage = win.style.maskImage = 'none'; maskOn = false; }
@@ -235,7 +234,7 @@
     const W = window.innerWidth, r = logoEnd.getBoundingClientRect(), box = win.getBoundingClientRect();
     const end = r.width, start = W * 3.4;
     const size = start * Math.pow(end / start, e);
-    const ax = .45 + .05 * e, ay = .6 - .1 * e;
+    const ax = .5, ay = .5;
     const px = r.left + r.width / 2 - box.left - size * ax, py = r.top + r.height / 2 - box.top - size * ay;
     win.style.webkitMaskSize = win.style.maskSize = size + 'px ' + size + 'px';
     win.style.webkitMaskPosition = win.style.maskPosition = px + 'px ' + py + 'px';

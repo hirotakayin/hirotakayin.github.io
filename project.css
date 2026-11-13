@@ -146,3 +146,8 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
   .layout.stack .split, .layout.stack .split.flip { grid-template-columns: minmax(0, 1fr); row-gap: 1.6rem; }
   .layout.stack .split.flip .split-pic { order: 2; }
 }
+/* title over the end gallery */
+.layout.stack .pics-title { margin-top: 8rem; }
+.layout.stack .pics-title h2 { margin: 0; }
+.layout.stack .pics-title .soon { font-size: var(--small); font-weight: 400; color: rgba(0, 0, 0, .6); }
+.layout.stack .pics-title + .pics { margin-top: 2rem; }

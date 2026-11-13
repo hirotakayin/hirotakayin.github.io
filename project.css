@@ -89,28 +89,6 @@ figcaption a:hover { opacity: .6; }
 /* "more coming soon" slot (Phil-Up): a quiet dashed box, shorter than a full placeholder */
 figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); background: none; font-size: var(--t); font-style: italic; color: rgba(0, 0, 0, .5); }
 
-/* paper preview: a small stack of pages that fans out on hover and opens full screen */
-.paper { display: block; width: 26rem; min-width: 150px; margin: 1rem 0 0 1rem; }
-.paper .sheets { position: relative; display: block; aspect-ratio: 720 / 932; }
-.paper .sheets img { position: absolute; inset: 0; width: 100%; height: 100%; background: #fff; box-shadow: 0 .2rem .8rem rgba(0, 0, 0, .14); transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s; }
-.paper .sheets img:nth-child(1) { transform: rotate(4deg) translate(.9rem, .3rem); }
-.paper .sheets img:nth-child(2) { transform: rotate(-3deg) translate(-.6rem, .2rem); }
-.paper .hint { position: absolute; left: 50%; bottom: 1.2rem; translate: -50% 0; padding: .3em .8em; background: rgba(0, 0, 0, .72); color: #fff; font-size: var(--small); white-space: nowrap; opacity: 0; transition: opacity .25s; }
-.paper:hover .sheets img:nth-child(1), .paper:focus-visible .sheets img:nth-child(1) { transform: rotate(9deg) translate(3.2rem, .6rem); }
-.paper:hover .sheets img:nth-child(2), .paper:focus-visible .sheets img:nth-child(2) { transform: rotate(-7deg) translate(-2.4rem, .4rem); }
-.paper:hover .sheets img:nth-child(3), .paper:focus-visible .sheets img:nth-child(3) { transform: translateY(-.8rem); box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, .22); }
-.paper:hover .hint, .paper:focus-visible .hint { opacity: 1; }
-.paper-label { display: block; margin-top: 1.4rem; font-size: var(--t); font-weight: 600; }
-.paper:hover .paper-label { opacity: .6; }
-@media (prefers-reduced-motion: reduce) { .paper .sheets img, .paper .hint { transition: none; } }
-/* full-screen reader */
-.reader { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: rgba(20, 20, 18, .88); backdrop-filter: blur(.4rem); }
-.reader-bar { display: flex; align-items: center; gap: 1.6rem; padding: 1rem 2rem; color: #fff; font-size: var(--small); }
-.reader-bar .title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.reader-bar a, .reader-bar button { color: #fff; font: inherit; font-weight: 600; background: none; border: 0; cursor: pointer; }
-.reader-bar a:hover, .reader-bar button:hover { opacity: .7; }
-.reader iframe { flex: 1; width: min(100%, 110rem); margin: 0 auto 2rem; border: 0; background: #fff; }
-@media (max-width: 760px) { .paper { width: 60%; margin: 2.4rem auto 0; } }
 /* YouTube channel screenshots (LEGO): wide slides on white, shown whole */
 .gallery.yt .slide { aspect-ratio: 2 / 1; padding: 1.2rem; }
 .gallery.yt figcaption { text-align: center; }
@@ -122,7 +100,6 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .layout.stack .pics > * { min-width: 0; }
 .layout.stack .pics .booklet { width: 100%; margin: 0; }
 .layout.stack .end { margin-top: 2rem; }
-.layout.stack .paper { margin-top: 2.4rem; }
 @media (max-width: 760px) {
   .layout.stack .full { margin-top: 4rem; }
   .layout.stack .pics { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; margin-top: 4.8rem; }
@@ -170,8 +147,3 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 /* section title above its row, so the picture lines up with the paragraph instead (LEGO "My niche") */
 .layout.stack .split + .split-title { margin-top: 4rem; }
 .layout.stack .split-title + .split.under-title { margin-top: 0; }
-/* manta ray: the paper stack sits left of section 1, its top level with the section title */
-.layout.stack .split.paper-row { grid-template-columns: 26rem minmax(0, 1fr); column-gap: 5rem; }
-.layout.stack .split.paper-row .paper { width: 100%; min-width: 0; margin: 0; }
-.layout.stack .split.paper-row + h3 { margin-top: 2.4rem; }
-@media (max-width: 760px) { .layout.stack .split.paper-row { grid-template-columns: minmax(0, 1fr); } .layout.stack .split.paper-row .paper { width: 60%; margin: 0 auto; } }

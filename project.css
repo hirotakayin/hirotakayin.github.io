@@ -167,3 +167,6 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 }
 .gallery .motion-toggle:hover { color: var(--ink); border-color: rgba(0, 0, 0, .45); }
 .gallery .motion-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* section title above its row, so the picture lines up with the paragraph instead (LEGO "My niche") */
+.layout.stack .split + .split-title { margin-top: 4rem; }
+.layout.stack .split-title + .split.under-title { margin-top: 0; }

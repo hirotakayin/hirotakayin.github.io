@@ -137,3 +137,12 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 @media (max-width: 760px) { .layout.stack .full .side { float: none; width: 100%; margin: 1.6rem 0; } }
 .layout.stack .full .after-side { clear: right; padding-top: 1.2rem; }
 .layout.stack .full .side video { display: block; width: 100%; height: auto; }
+/* a numbered section with its picture beside it, tops lined up with the section title (Phil-Up) */
+.layout.stack .split { display: grid; grid-template-columns: minmax(0, 1fr) 42%; column-gap: 4rem; align-items: start; margin-top: 2.4rem; }
+.layout.stack .split.flip { grid-template-columns: 42% minmax(0, 1fr); }
+.layout.stack .split h3 { margin-top: 0; }
+.layout.stack .split-pic img, .layout.stack .split-pic video { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) {
+  .layout.stack .split, .layout.stack .split.flip { grid-template-columns: minmax(0, 1fr); row-gap: 1.6rem; }
+  .layout.stack .split.flip .split-pic { order: 2; }
+}

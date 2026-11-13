@@ -136,3 +136,4 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .layout.stack .full::after { content: ""; display: block; clear: both; }
 @media (max-width: 760px) { .layout.stack .full .side { float: none; width: 100%; margin: 1.6rem 0; } }
 .layout.stack .full .after-side { clear: right; padding-top: 1.2rem; }
+.layout.stack .full .side video { display: block; width: 100%; height: auto; }

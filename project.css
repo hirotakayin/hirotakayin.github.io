@@ -170,3 +170,8 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 /* section title above its row, so the picture lines up with the paragraph instead (LEGO "My niche") */
 .layout.stack .split + .split-title { margin-top: 4rem; }
 .layout.stack .split-title + .split.under-title { margin-top: 0; }
+/* manta ray: the paper stack sits left of section 1, its top level with the section title */
+.layout.stack .split.paper-row { grid-template-columns: 26rem minmax(0, 1fr); column-gap: 5rem; }
+.layout.stack .split.paper-row .paper { width: 100%; min-width: 0; margin: 0; }
+.layout.stack .split.paper-row + h3 { margin-top: 2.4rem; }
+@media (max-width: 760px) { .layout.stack .split.paper-row { grid-template-columns: minmax(0, 1fr); } .layout.stack .split.paper-row .paper { width: 60%; margin: 0 auto; } }

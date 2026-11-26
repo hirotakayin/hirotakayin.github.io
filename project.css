@@ -147,3 +147,9 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 /* section title above its row, so the picture lines up with the paragraph instead (LEGO "My niche") */
 .layout.stack .split + .split-title { margin-top: 4rem; }
 .layout.stack .split-title + .split.under-title { margin-top: 0; }
+/* Soft robotics fin gallery: transparent 16:9 slides sitting on the page */
+.gallery.clear.wide .slide { aspect-ratio: 16 / 9; }
+/* Soft robotics: several pictures stacked in one column with even gaps; extra room below the overview */
+.layout.stack .pic-stack { display: flex; flex-direction: column; gap: 4rem; }
+.layout.stack .pic-stack > figure { margin: 0; }
+.layout.stack .split.after-hero { margin-top: 6rem; }

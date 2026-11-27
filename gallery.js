@@ -30,3 +30,12 @@ document.querySelectorAll('.gallery').forEach((g) => {
   });
   mark();
 });
+
+// side pictures cropped at first: the arrow widens the picture column to show the whole thing
+document.querySelectorAll('.expand-btn').forEach((b) => {
+  b.addEventListener('click', () => {
+    const open = b.closest('.split').classList.toggle('open');
+    b.setAttribute('aria-expanded', open);
+    b.setAttribute('aria-label', open ? 'crop the picture again' : 'show the whole picture');
+  });
+});

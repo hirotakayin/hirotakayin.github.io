@@ -11,7 +11,8 @@ document.querySelectorAll('.gallery').forEach((g) => {
     dots.appendChild(d);
   });
   const at = () => Math.round(track.scrollLeft / track.clientWidth);
-  const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * track.clientWidth, behavior: 'smooth' });
+  // scroll to the slide's own position (not index × width) so rounding never leaves a sliver of the previous slide
+  const go = (i) => track.scrollTo({ left: slides[Math.max(0, Math.min(slides.length - 1, i))].offsetLeft - slides[0].offsetLeft, behavior: 'smooth' });
   const mark = () => {
     const i = at();
     [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));

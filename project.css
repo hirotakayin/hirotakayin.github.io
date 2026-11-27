@@ -199,3 +199,11 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
   .pnav-name { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .pnav svg, .pnav-name { transition: none; } }
+/* more room before "all projects" */
+.back { margin-top: 6.4rem; }
+/* arrow hover names sit on a white card so they stay readable over pictures */
+.pnav-name { padding: .5rem 1rem; background: rgba(255, 255, 255, .88); box-shadow: 0 1px 4px rgba(0, 0, 0, .12); color: rgba(0, 0, 0, .75); }
+/* a side picture about 25% bigger than usual (Kamome) */
+.layout.stack .split.flip.big { grid-template-columns: 52.5% minmax(0, 1fr); }
+@media (max-width: 760px) { .layout.stack .split.flip.big { grid-template-columns: minmax(0, 1fr); } }
+.layout.stack .end { margin-top: 7rem; }

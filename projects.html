@@ -17,6 +17,12 @@
     .big { grid-column: span 6; }
     .mid { grid-column: span 4; }
     .small { grid-column: span 3; }
+    /* last row: LEGO on the left, the three less-engineering tiles in the space of two on the right */
+    .grid.lower { margin-top: 2.4rem; }
+    .grid .side { grid-column: span 8; }
+    .side .sec { margin-top: 0; }
+    .grid.trio { grid-template-columns: repeat(3, 1fr); }
+    .grid.trio .over strong { font-size: 1.5rem; padding: 0 1.2rem; text-align: center; }
     .grid .ph { aspect-ratio: 16 / 10; min-height: 0; }
     .grid img { aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
     /* cut-outs (PNGs, and anything mostly see-through) sit straight on the paper instead of on a white card */
@@ -32,7 +38,8 @@
       main { width: auto; margin: 0; padding: 8.4rem var(--pad) 8rem; }
       h2.sec { font-size: 2rem; }
       .grid { grid-template-columns: 1fr; row-gap: 3.2rem; }
-      .grid > .tile { grid-column: auto; }
+      .grid > .tile, .grid .side { grid-column: auto; }
+      .grid.trio { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -71,11 +78,16 @@
       <a class="tile mid" href="projects/senior-capstone.html"><span class="art"><img class="ink" src="images/senior-capstone-preview-1-1.webp" alt="" loading="lazy"></span><span class="over print"><strong>Senior Capstone</strong></span><span class="name print">Senior Capstone</span></a>
     </div>
 
-    <h2 class="sec print">Not as much engineering</h2>
-    <div class="grid">
-      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink clear" src="images/lego-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>melty's LEGO</strong></span><span class="name print">melty's LEGO</span></a>
-      <a class="tile mid" href="projects/music.html"><span class="art"><img class="ink" src="images/music-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span><span class="name print">Music</span></a>
-      <a class="tile mid" href="projects/graphic-design.html"><span class="art"><img class="ink clear" src="images/graphics-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Graphic Design</strong></span><span class="name print">Graphic Design</span></a>
+    <div class="grid lower">
+      <a class="tile mid" href="projects/lego.html"><span class="art"><img class="ink clear" src="images/lego-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Shameless plug for my channel</strong></span><span class="name print">melty's LEGO</span></a>
+      <div class="side">
+        <h2 class="sec print">Not as much engineering</h2>
+        <div class="grid trio">
+          <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/music-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span><span class="name print">Music</span></a>
+          <a class="tile" href="projects/graphic-design.html"><span class="art"><img class="ink clear" src="images/graphics-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Art and Graphics</strong></span><span class="name print">Art and Graphics</span></a>
+          <div class="tile" tabindex="0"><span class="art"><img class="ink" src="images/cooking-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Recipe app in the works</strong></span><span class="name print">Cooking (coming soon)</span></div>
+        </div>
+      </div>
     </div>
 
   </main>

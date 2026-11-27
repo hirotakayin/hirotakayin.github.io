@@ -153,3 +153,14 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .layout.stack .pic-stack { display: flex; flex-direction: column; gap: 4rem; }
 .layout.stack .pic-stack > figure { margin: 0; }
 .layout.stack .split.after-hero { margin-top: 6rem; }
+/* LEGO: channel avatar before the title */
+.text h1 .avatar { display: inline-block; width: 1.4em; height: 1.4em; margin-right: .45em; border-radius: 50%; vertical-align: -.35em; }
+/* Music: 3-column photo wall; picture heights are set in the page so the columns start and end together */
+.layout.stack .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 1.6rem; margin-top: 8rem; align-items: start; }
+.layout.stack .wall img { display: block; width: 100%; height: auto; object-fit: cover; }
+.layout.stack .wall img + img { margin-top: 3%; }
+@media (max-width: 760px) { .layout.stack .wall { column-gap: .8rem; margin-top: 4.8rem; } }
+/* galleries beside text keep a fixed slide shape; mixed portrait/landscape pictures fit inside it */
+.layout.stack .split-pic.gallery .slide img { height: 100%; object-fit: contain; }
+/* portrait photos beside text: narrower so they don't tower over the paragraph */
+.layout.stack .split-pic.portrait img { width: 66%; }

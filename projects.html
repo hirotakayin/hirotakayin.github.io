@@ -22,6 +22,15 @@
     .grid .side { grid-column: span 8; }
     .side .sec { margin-top: 0; }
     .grid.trio { grid-template-columns: repeat(3, 1fr); }
+    /* the three small tiles stretch to LEGO's height, cropping their pictures, so all four names line up */
+    .grid.lower { align-items: stretch; }
+    .grid .side { display: flex; flex-direction: column; }
+    .grid.trio { flex: 1; align-items: stretch; }
+    .grid.trio .tile { display: flex; flex-direction: column; }
+    .grid.trio .pic { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+    .grid.trio .art { position: absolute; inset: 0; }
+    .grid.trio .art img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
+    .grid.trio .tile .over { inset: 0; aspect-ratio: auto; }
     .grid.trio .over strong { font-size: 1.5rem; padding: 0 1.2rem; text-align: center; }
     .grid .ph { aspect-ratio: 16 / 10; min-height: 0; }
     .grid img { aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
@@ -40,6 +49,7 @@
       .grid { grid-template-columns: 1fr; row-gap: 3.2rem; }
       .grid > .tile, .grid .side { grid-column: auto; }
       .grid.trio { grid-template-columns: 1fr; }
+      .grid.trio .pic { flex: none; aspect-ratio: 16 / 10; }
     }
   </style>
 </head>
@@ -83,9 +93,9 @@
       <div class="side">
         <h2 class="sec print">Not as much engineering</h2>
         <div class="grid trio">
-          <a class="tile" href="projects/music.html"><span class="art"><img class="ink" src="images/music-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span><span class="name print">Music</span></a>
-          <a class="tile" href="projects/graphic-design.html"><span class="art"><img class="ink clear" src="images/graphics-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Art and Graphics</strong></span><span class="name print">Art and Graphics</span></a>
-          <div class="tile" tabindex="0"><span class="art"><img class="ink" src="images/cooking-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Recipe app in the works</strong></span><span class="name print">Cooking (coming soon)</span></div>
+          <a class="tile" href="projects/music.html"><span class="pic"><span class="art"><img class="ink" src="images/music-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Music</strong></span></span><span class="name print">Music</span></a>
+          <a class="tile" href="projects/graphic-design.html"><span class="pic"><span class="art"><img class="ink clear" src="images/graphics-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Art and Graphics</strong></span></span><span class="name print">Art and Graphics</span></a>
+          <div class="tile" tabindex="0"><span class="pic"><span class="art"><img class="ink" src="images/cooking-project-thumbnail.webp" alt="" loading="lazy"></span><span class="over print"><strong>Recipe app in the works</strong></span></span><span class="name print">Cooking (coming soon)</span></div>
         </div>
       </div>
     </div>

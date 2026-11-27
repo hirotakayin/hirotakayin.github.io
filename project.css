@@ -179,3 +179,23 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 /* a side picture about 20% smaller than usual (CERLAB tracker) */
 .layout.stack .split.flip.narrow { grid-template-columns: 33.6% minmax(0, 1fr); }
 @media (max-width: 760px) { .layout.stack .split.flip.narrow { grid-template-columns: minmax(0, 1fr); } }
+/* previous / next project arrows, fixed on the sides of the page (project-nav.js) */
+.pnav { position: fixed; z-index: 20; top: 50%; display: flex; align-items: center; gap: 1.2rem; padding: 1.6rem; transform: translateY(-50%); color: rgba(0, 0, 0, .55); font-size: var(--small); text-decoration: none; }
+.pnav.prev { left: 6rem; }
+.pnav.next { right: 6rem; flex-direction: row-reverse; }
+.pnav svg { width: 2.2rem; height: 2rem; fill: rgba(0, 0, 0, .3); transition: fill .2s, transform .2s; }
+.pnav.prev svg { transform: rotate(-90deg); }
+.pnav.next svg { transform: rotate(90deg); }
+.pnav-name { opacity: 0; white-space: nowrap; transition: opacity .2s; }
+.pnav:hover svg, .pnav:focus-visible svg { fill: rgba(0, 0, 0, .75); }
+.pnav.prev:hover svg { transform: rotate(-90deg) translateY(.3rem); }
+.pnav.next:hover svg { transform: rotate(90deg) translateY(.3rem); }
+.pnav:hover .pnav-name, .pnav:focus-visible .pnav-name { opacity: 1; }
+@media (max-width: 760px) {
+  /* phones: small round buttons in the bottom corners, names hidden */
+  .pnav { top: auto; bottom: 1.6rem; transform: none; padding: 1.2rem; border-radius: 50%; background: rgba(255, 255, 255, .85); box-shadow: 0 1px 4px rgba(0, 0, 0, .15); }
+  .pnav.prev { left: var(--pad); }
+  .pnav.next { right: var(--pad); }
+  .pnav-name { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pnav svg, .pnav-name { transition: none; } }

@@ -164,3 +164,14 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .layout.stack .split-pic.gallery .slide img { height: 100%; object-fit: contain; }
 /* portrait photos beside text: narrower so they don't tower over the paragraph */
 .layout.stack .split-pic.portrait img { width: 66%; }
+/* key sentences: bold in navy */
+.text b.hl { font-weight: 600; color: #1d2f63; }
+/* a picture that takes the height of the text beside it (capstone demo-day photo) */
+.layout.stack .split.match { align-items: stretch; }
+.layout.stack .split.match .split-pic { position: relative; margin: 0; }
+.layout.stack .split.match .split-pic img { position: absolute; top: 0; left: 0; width: auto; max-width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
+@media (max-width: 760px) { .layout.stack .split.match .split-pic { position: static; } .layout.stack .split.match .split-pic img { position: static; width: 100%; height: auto; } }
+/* a second heading inside a side-by-side text column (Phil-Up "What I did") */
+.layout.stack .split p + h2 { margin-top: 3.2rem; }
+/* a full-width paragraph right after a side-by-side block */
+.layout.stack .split + p { margin-top: 2.4rem; }

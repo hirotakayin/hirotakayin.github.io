@@ -175,3 +175,4 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .layout.stack .split p + h2 { margin-top: 3.2rem; }
 /* a full-width paragraph right after a side-by-side block */
 .layout.stack .split + p { margin-top: 2.4rem; }
+.print b.hl { filter: none; }

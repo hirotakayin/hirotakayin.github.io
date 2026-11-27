@@ -207,3 +207,10 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .layout.stack .split.flip.big { grid-template-columns: 52.5% minmax(0, 1fr); }
 @media (max-width: 760px) { .layout.stack .split.flip.big { grid-template-columns: minmax(0, 1fr); } }
 .layout.stack .end { margin-top: 7rem; }
+/* capstone: hero picture the same width as the side pictures below */
+.layout.wide .row.hero-split { grid-template-columns: 42% minmax(0, 1fr); column-gap: 4rem; }
+@media (max-width: 760px) { .layout.wide .row.hero-split { grid-template-columns: 1fr; } }
+/* a small photo floated into the right of a paragraph */
+.text .inline-pic { float: right; width: 38%; margin: .4rem 0 1rem 2rem; }
+.text .inline-pic img { display: block; width: 100%; height: auto; }
+.layout.stack .split > div::after { content: ""; display: block; clear: both; }

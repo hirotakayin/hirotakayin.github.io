@@ -17,6 +17,8 @@ document.querySelectorAll('.gallery').forEach((g) => {
     [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
     g.querySelector('.g-prev').disabled = i === 0;
     g.querySelector('.g-next').disabled = i === slides.length - 1;
+    // optional: text that changes with the slide (one child per slide, in a [data-desc-for="<gallery id>"] block)
+    if (g.id) document.querySelectorAll('[data-desc-for="' + g.id + '"] > *').forEach((d, k) => { d.hidden = k !== i; });
   };
   g.querySelector('.g-prev').addEventListener('click', () => go(at() - 1));
   g.querySelector('.g-next').addEventListener('click', () => go(at() + 1));

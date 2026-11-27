@@ -214,3 +214,8 @@ figure .ph.soon { min-height: 24rem; border: 1px dashed rgba(0, 0, 0, .25); back
 .text .inline-pic { float: right; width: 38%; margin: .4rem 0 1rem 2rem; }
 .text .inline-pic img { display: block; width: 100%; height: auto; }
 .layout.stack .split > div::after { content: ""; display: block; clear: both; }
+/* room between the skills chips and whatever text follows them */
+.text .skills + * { margin-top: 3.2rem; }
+/* music hero: pictures sit at the top of the slide so they line up with the title */
+.gallery.top .slide { align-items: flex-start; }
+.gallery.top .slide img { object-position: top; }
